@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acil Servis Asistanı 🚑</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #e63946;
+    --red-soft: #fff0f1;
+    --amber: #f4a261;
+    --amber-soft: #fff8f0;
+    --green: #2d6a4f;
+    --green-soft: #edf6f0;
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.14);
+    --text: #1a1a1a;
+    --text-muted: #666;
+    --text-faint: #999;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.07), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--red);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .logo-text {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+  .logo-sub {
+    font-size: 11px;
+    color: var(--text-faint);
+    font-family: var(--mono);
+  }
+  .header-chips {
+    display: flex;
+    gap: 6px;
+  }
+  .chip {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: var(--mono);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .chip-red { border-color: var(--red); color: var(--red); background: var(--red-soft); }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: calc(100vh - 56px);
+  }
+
+  /* SIDEBAR */
+  sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 16px 0;
+    overflow-y: auto;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+  .nav-section {
+    margin-bottom: 4px;
+  }
+  .nav-label {
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 8px 16px 4px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-muted);
+    transition: all .15s;
+    border-left: 2px solid transparent;
+  }
+  .nav-item:hover { background: var(--bg); color: var(--text); }
+  .nav-item.active { background: var(--red-soft); color: var(--red); border-left-color: var(--red); font-weight: 500; }
+  .nav-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .nd-r { background: var(--red); }
+  .nd-a { background: var(--amber); }
+  .nd-g { background: var(--green); }
+
+  /* MAIN */
+  main {
+    padding: 24px;
+    max-width: 860px;
+  }
+
+  /* PAGE SECTIONS */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ANALIZ PAGE */
+  .page-title {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .field-label {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
+  }
+  textarea {
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 13px;
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--bg);
+    resize: vertical;
+    min-height: 130px;
+    line-height: 1.65;
+    transition: border-color .15s;
+  }
+  textarea:focus { outline: none; border-color: var(--red); background: #fff; }
+  textarea::placeholder { color: var(--text-faint); }
+  .btn-row { display: flex; gap: 8px; margin-top: 12px; align-items: center; }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: opacity .15s, transform .1s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-primary:hover { opacity: .88; }
+  .btn-primary:active { transform: scale(.98); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-strong);
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--sans);
+  }
+  .btn-secondary:hover { background: var(--bg); }
+  .how-it-works {
+    background: linear-gradient(135deg, #fff8f8, #fff);
+    border: 1px solid rgba(230,57,70,.15);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .how-it-works strong { color: var(--text); }
+  .how-steps { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+  .how-step {
+    flex: 1; min-width: 120px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .how-step-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+
+  /* RESULT CARD */
+  .result-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-top: 16px;
+    animation: fadeIn .3s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  .result-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .triage-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: var(--mono);
+  }
+  .t-kirmizi { background: var(--red-soft); color: var(--red); }
+  .t-sari { background: var(--amber-soft); color: #c07020; }
+  .t-yesil { background: var(--green-soft); color: var(--green); }
+  .result-section {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .result-section:last-child { border-bottom: none; }
+  .rs-title {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .rs-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .rs-body {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+    white-space: pre-wrap;
+  }
+  .rs-body strong { font-weight: 600; }
+
+  /* QUICK LOOKUP */
+  .search-bar {
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--bg);
+    margin-bottom: 16px;
+  }
+  .search-bar:focus { outline: none; border-color: var(--red); background: #fff; }
+  .dx-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .dx-btn {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    text-align: left;
+    font-size: 12px;
+    font-family: var(--sans);
+    color: var(--text-muted);
+    transition: all .15s;
+    border-left: 3px solid transparent;
+    box-shadow: var(--shadow);
+  }
+  .dx-btn:hover { border-color: var(--border-strong); color: var(--text); transform: translateY(-1px); }
+  .dx-btn.sel { border-left-color: var(--red); background: var(--red-soft); color: var(--red); }
+  .dx-btn.sel-a { border-left-color: var(--amber); background: var(--amber-soft); color: #c07020; }
+  .dx-btn.sel-g { border-left-color: #2d6a4f; background: var(--green-soft); color: var(--green); }
+  .dx-cat {
+    font-size: 9px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 3px;
+    opacity: .7;
+  }
+  .dx-name { font-weight: 500; font-size: 12.5px; }
+
+  .detail-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    animation: fadeIn .25s ease;
+  }
+  .detail-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .detail-title { font-size: 16px; font-weight: 600; }
+  .detail-row {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .dr-label {
+    font-size: 10px;
+    font-weight: 600;
+    font-family: var(--mono);
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: 6px;
+  }
+  .dr-value {
+    font-size: 13.5px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    color: var(--text);
+  }
+  .notion-pill {
+    font-size: 10px;
+    font-family: var(--mono);
+    padding: 2px 7px;
+    border-radius: 6px;
+    background: #e8f0fe;
+    color: #1a56db;
+    border: 1px solid #c7d7fd;
+  }
+
+  /* SPINNER */
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(230,57,70,.2);
+    border-top-color: var(--red);
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .about-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    box-shadow: var(--shadow);
+  }
+  .about-num {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--mono);
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .about-desc { font-size: 12px; color: var(--text-muted); }
+  .warn-box {
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.6;
+  }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* RESPONSIVE */
+  @media (max-width: 700px) {
+    .layout { grid-template-columns: 1fr; }
+    sidebar { display: none; }
+    main { padding: 16px; }
+    .dx-grid { grid-template-columns: repeat(2, 1fr); }
+    .about-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🚑</div>
+    <div>
+      <div class="logo-text">Acil Asistan</div>
+      <div class="logo-sub">Yüksekova Devlet Hastanesi · ACİL SERVİS</div>
+    </div>
+  </div>
+  <div class="header-chips">
+    <span class="chip chip-red">40+ Yaklaşım</span>
+    <span class="chip">Kişisel Veritabanı</span>
+  </div>
+</header>
+
+<div class="layout">
+<sidebar>
+  <div class="nav-section">
+    <div class="nav-label">Menü</div>
+    <div class="nav-item active" onclick="nav('analiz', this)">
+      <span>🔍</span> Hasta Analizi
+    </div>
+    <div class="nav-item" onclick="nav('hizli', this)">
+      <span>📋</span> Hızlı Bakış
+    </div>
+    <div class="nav-item" onclick="nav('about', this)">
+      <span>ℹ️</span> Hakkında
+    </div>
+  </div>
+  <div class="nav-section" style="margin-top:8px">
+    <div class="nav-label">🔴 Kırmızı Alan</div>
+    <div class="nav-item" onclick="navDx('Anafılaksi')"><span class="nav-dot nd-r"></span>Anafılaksi</div>
+    <div class="nav-item" onclick="navDx('STEMI')"><span class="nav-dot nd-r"></span>STEMI</div>
+    <div class="nav-item" onclick="navDx('NSTEMI')"><span class="nav-dot nd-r"></span>NSTEMI</div>
+    <div class="nav-item" onclick="navDx('PE')"><span class="nav-dot nd-r"></span>PE</div>
+    <div class="nav-item" onclick="navDx('SVO')"><span class="nav-dot nd-r"></span>SVO</div>
+    <div class="nav-item" onclick="navDx('Aort Diseksiyonu')"><span class="nav-dot nd-r"></span>Aort Diseksiyonu</div>
+    <div class="nav-item" onclick="navDx('Bradikardi')"><span class="nav-dot nd-r"></span>Bradikardi</div>
+    <div class="nav-item" onclick="navDx('Kalp Tamponad')"><span class="nav-dot nd-r"></span>Kalp Tamponad</div>
+    <div class="nav-item" onclick="navDx('Hızlı Sert Entübasyon')"><span class="nav-dot nd-r"></span>Hızlı Sert Entüb.</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">🟡 Sarı Alan</div>
+    <div class="nav-item" onclick="navDx('Hipertansiyon')"><span class="nav-dot nd-a"></span>Hipertansiyon</div>
+    <div class="nav-item" onclick="navDx('Astım-KOAH')"><span class="nav-dot nd-a"></span>Astım-KOAH</div>
+    <div class="nav-item" onclick="navDx('Diabetik Ketoasidoz')"><span class="nav-dot nd-a"></span>Diab. Ketoasidoz</div>
+    <div class="nav-item" onclick="navDx('Hiperglisemik Hiperosmolar')"><span class="nav-dot nd-a"></span>Hiperglis. Hiperos.</div>
+    <div class="nav-item" onclick="navDx('Akut Böbrek Yetmezliği')"><span class="nav-dot nd-a"></span>Akut Böbr. Yet.</div>
+    <div class="nav-item" onclick="navDx('Pyelonefrit')"><span class="nav-dot nd-a"></span>Pyelonefrit</div>
+    <div class="nav-item" onclick="navDx('GİS Kanaması')"><span class="nav-dot nd-a"></span>GİS Kanaması</div>
+    <div class="nav-item" onclick="navDx('Preeklampsi')"><span class="nav-dot nd-a"></span>Preeklampsi</div>
+    <div class="nav-item" onclick="navDx('Status Epileptikus')"><span class="nav-dot nd-a"></span>Status Epileptikus</div>
+    <div class="nav-item" onclick="navDx('KKKA')"><span class="nav-dot nd-a"></span>KKKA</div>
+    <div class="nav-item" onclick="navDx('Yanık')"><span class="nav-dot nd-a"></span>Yanık</div>
+    <div class="nav-item" onclick="navDx('Kuduz Risk Teması')"><span class="nav-dot nd-a"></span>Kuduz Risk Teması</div>
+    <div class="nav-item" onclick="navDx('Akut Pankreatit')"><span class="nav-dot nd-a"></span>Akut Pankreatit</div>
+    <div class="nav-item" onclick="navDx('Akut Apandisit')"><span class="nav-dot nd-a"></span>Akut Apandisit</div>
+    <div class="nav-item" onclick="navDx('Akut Kolesistit')"><span class="nav-dot nd-a"></span>Akut Kolesistit</div>
+    <div class="nav-item" onclick="navDx('GİS Perforasyon')"><span class="nav-dot nd-a"></span>GİS Perforasyon</div>
+    <div class="nav-item" onclick="navDx('İleus')"><span class="nav-dot nd-a"></span>İleus</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">🟢 Yeşil Alan</div>
+    <div class="nav-item" onclick="navDx('Sistit')"><span class="nav-dot nd-g"></span>Sistit</div>
+    <div class="nav-item" onclick="navDx('Epistaksis')"><span class="nav-dot nd-g"></span>Epistaksis</div>
+    <div class="nav-item" onclick="navDx('Miyalji')"><span class="nav-dot nd-g"></span>Miyalji</div>
+    <div class="nav-item" onclick="navDx('Burkulma')"><span class="nav-dot nd-g"></span>Burkulma</div>
+    <div class="nav-item" onclick="navDx('Başağrısı')"><span class="nav-dot nd-g"></span>Başağrısı</div>
+    <div class="nav-item" onclick="navDx('Vertigo')"><span class="nav-dot nd-g"></span>Vertigo</div>
+    <div class="nav-item" onclick="navDx('Gastrit')"><span class="nav-dot nd-g"></span>Gastrit</div>
+    <div class="nav-item" onclick="navDx('Viral Gastroenterit')"><span class="nav-dot nd-g"></span>Viral Gastroenterit</div>
+    <div class="nav-item" onclick="navDx('Bakteriyel Gastroenterit')"><span class="nav-dot nd-g"></span>Bakt. Gastroenterit</div>
+    <div class="nav-item" onclick="navDx('Paraziter Gastroenterit')"><span class="nav-dot nd-g"></span>Paraziter Gastroent.</div>
+    <div class="nav-item" onclick="navDx('Kabızlık')"><span class="nav-dot nd-g"></span>Kabızlık</div>
+    <div class="nav-item" onclick="navDx('Akut Otitis Media')"><span class="nav-dot nd-g"></span>Akut Otitis Media</div>
+    <div class="nav-item" onclick="navDx('Akut Otitis Externa')"><span class="nav-dot nd-g"></span>Akut Otitis Externa</div>
+    <div class="nav-item" onclick="navDx('Sinüzit')"><span class="nav-dot nd-g"></span>Sinüzit</div>
+    <div class="nav-item" onclick="navDx('Bakteriyel Tonsillofarenjit')"><span class="nav-dot nd-g"></span>Bakt. Tonsillofarenjit</div>
+    <div class="nav-item" onclick="navDx('Viral Tonsillofarenjit')"><span class="nav-dot nd-g"></span>Viral Tonsillofarenjit</div>
+    <div class="nav-item" onclick="navDx('Bakteriyel Konjonktivit')"><span class="nav-dot nd-g"></span>Bakt. Konjonktivit</div>
+    <div class="nav-item" onclick="navDx('Viral Konjonktivit')"><span class="nav-dot nd-g"></span>Viral Konjonktivit</div>
+    <div class="nav-item" onclick="navDx('Alerjik Rinit')"><span class="nav-dot nd-g"></span>Alerjik Rinit</div>
+    <div class="nav-item" onclick="navDx('Periferik Fasiyal Paralizi')"><span class="nav-dot nd-g"></span>Periferik Fас. Paralizi</div>
+    <div class="nav-item" onclick="navDx('Arpacık')"><span class="nav-dot nd-g"></span>Arpacık (Hordeolum)</div>
+    <div class="nav-item" onclick="navDx('Aft')"><span class="nav-dot nd-g"></span>Aft</div>
+    <div class="nav-item" onclick="navDx('Anal Fissür')"><span class="nav-dot nd-g"></span>Anal Fissür</div>
+    <div class="nav-item" onclick="navDx('Konstipasyon')"><span class="nav-dot nd-g"></span>Konstipasyon</div>
+    <div class="nav-item" onclick="navDx('Demir Eksikliği Anemisi')"><span class="nav-dot nd-g"></span>Demir Eks. Anemisi</div>
+  </div>
+</sidebar>
+
+<main>
+
+<!-- ANALIZ PAGE -->
+<div id="page-analiz" class="page active">
+  <div class="page-title">Hasta Analizi</div>
+  <div class="page-sub">Hastanın bilgilerini serbest metinle yazın — tanı, tetkik, order ve reçete önerisi alın.</div>
+
+  <div class="card">
+    <div class="field-label">Hasta Bilgileri</div>
+    <textarea id="hasta-input" placeholder="Örnek:
+Yaş/Cinsiyet: 45E
+Şikayet: 2 saattir göğüs ağrısı, sol kola yayılım, terleme
+ÖGM: DM tip 2, HT, sigara 1pk/gün
+Vitaller: TA 155/95, Nabız 102, SPO2 96, Ateş 36.8
+Muayene: Akciğerler açık, S1S2 normal"></textarea>
+    <div class="btn-row">
+      <button class="btn-primary" id="analyze-btn" onclick="analyze()">
+        🔍 Analiz Et
+      </button>
+      <button class="btn-secondary" onclick="clearAnaliz()">Temizle</button>
+    </div>
+  </div>
+
+  <div id="result-area"></div>
+
+  <div class="how-it-works" id="how-block">
+    <strong>Nasıl çalışır?</strong> Hasta bilgilerini yazıp "Analiz Et" butonuna basın. Yapay zeka, Notion veritabanınızdaki tüm yaklaşımları, order ve reçeteleri baz alarak triaj seviyesi, olası tanılar, tetkikler, acil order ve reçete önerisini üretir.
+    <div class="how-steps">
+      <div class="how-step"><div class="how-step-num">01</div>Hasta bilgilerini yazın</div>
+      <div class="how-step"><div class="how-step-num">02</div>Analiz Et'e basın</div>
+      <div class="how-step"><div class="how-step-num">03</div>Triaj + tanı alın</div>
+      <div class="how-step"><div class="how-step-num">04</div>Order + reçete görün</div>
+    </div>
+  </div>
+</div>
+
+<!-- HIZLI BAKIM PAGE -->
+<div id="page-hizli" class="page">
+  <div class="page-title">Hızlı Bakış</div>
+  <div class="page-sub">Notion veritabanınızdaki tüm yaklaşımlar — tetkik, order ve reçeteye anında erişin.</div>
+
+  <input class="search-bar" id="dx-search" placeholder="🔍  Yaklaşım ara... (ör: göğüs ağrısı, dispne, ateş)" oninput="filterDx()">
+
+  <div class="dx-grid" id="dx-grid"></div>
+  <div id="dx-detail"></div>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="page-about" class="page">
+  <div class="page-title">Hakkında</div>
+  <div class="page-sub">Yüksekova Devlet Hastanesi Acil Servisi için kişisel klinik karar destek sistemi.</div>
+  <div class="about-grid">
+    <div class="about-item"><div class="about-num">40+</div><div class="about-desc">Notion'dan alınan yaklaşım</div></div>
+    <div class="about-item"><div class="about-num">3</div><div class="about-desc">Triaj seviyesi (Kırmızı / Sarı / Yeşil)</div></div>
+    <div class="about-item"><div class="about-num">100%</div><div class="about-desc">Kişisel veritabanınıza dayalı</div></div>
+    <div class="about-item"><div class="about-num">0</div><div class="about-desc">Sunucu — tamamen tarayıcıda çalışır</div></div>
+  </div>
+  <div class="warn-box">
+    ⚠️ <strong>Uyarı:</strong> Bu araç klinik karar desteği amaçlıdır. Kesin tanı ve tedavi kararları her zaman hekimin klinik değerlendirmesine dayanmalıdır. Kanıta dayalı kılavuzlar (Türk ACİL tıp, ACEP, ESC/ESH) referans alınmıştır ancak her hasta bireysel değerlendirilmelidir.
+  </div>
+  <div class="card" style="margin-top:16px">
+    <div class="field-label">API Anahtarı Ayarı</div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:10px">Hasta analizi için Anthropic API anahtarınızı girin. Anahtar yalnızca tarayıcınızda saklanır, hiçbir sunucuya gönderilmez.</p>
+    <div style="display:flex;gap:8px">
+      <input type="password" id="api-key-input" placeholder="sk-ant-..." style="flex:1;border:1px solid var(--border-strong);border-radius:8px;padding:9px 12px;font-size:13px;font-family:var(--sans)">
+      <button class="btn-primary" onclick="saveKey()">Kaydet</button>
+    </div>
+    <div id="key-status" style="font-size:12px;margin-top:8px;color:var(--text-faint)"></div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+// ============================================================
+// NOTION VERİTABANI — TÜM YAKLAŞIMLAR
+// ============================================================
+const DB = {
+  "Anafılaksi": {
+    alan: "KIRMIZI",
+    istekler: "—",
+    order: "500cc SF IV inf + bacak elevasyonu + O2\n→ 0.5mg ADRENALİN IM (5-15 dk'da tekrar)\n→ 1amp Ventolin nebül\n→ 1000cc SF'de 1amp Avil IV + 1mg/kg Prednol IV inf\n→ 1amp Pantoprazol IV push\n→ Uzman kons",
+    recete: "Oral Bilaxten tb 1×1 (5 gün)\n[Ped: Deloday süsp 1mg/kg — 5 gün]",
+    notes: "8-10 saat monitörize. Pediyatrik yarı doz."
+  },
+  "STEMI": {
+    alan: "KIRMIZI",
+    istekler: "EKG (ST elevasyonu) + Troponin\n⚠️ Troponin gelmeden SEVK et",
+    order: "O2 → Aspirin 300mg çiğneme tb\n→ Plavix 600mg oral\n→ Pantoprazol 1amp IV push\n→ Heparx 5000U IV push VEYA Clexane 0.8cc SC\n→ İsordil 5mg sublingual\n→ Morfin 3mg IV push (ağrı devam ederse)\n→ ANJİYO için KONS/SEVK",
+    recete: "",
+    notes: ""
+  },
+  "NSTEMI": {
+    alan: "KIRMIZI",
+    istekler: "Troponin 0 / 2 / 8. saat\nST elevasyonu YOK",
+    order: "O2 → Aspirin 300mg çiğneme tb\n→ Pantoprazol 1amp IV push\n→ Heparx 5000U IV push VEYA Clexane 0.8cc SC (0.1cc/10kg)\n→ İsordil 5mg (3 kez verilebilir)\n→ Morfin 3mg IV push SF'de\n→ ANJİYO için KONS/SEVK",
+    recete: "",
+    notes: "İsordil KONTRENDİKE: hipotansiyon / sağ MI / bradikardi\nAnjio 24h ertelenirse: Plavix 300mg ekle + Arixtra 2.5mg SC"
+  },
+  "PE": {
+    alan: "KIRMIZI",
+    istekler: "CBC/BK/CRP + EKG + PAAG\n→ Toraks BT Anjio",
+    order: "O2 → Göğüs Hastalıkları KONS/SEVK",
+    recete: "",
+    notes: "Masif PE = BP düşük. Wells/Geneva düşük → D-dimer gerekmez"
+  },
+  "SVO": {
+    alan: "KIRMIZI",
+    istekler: "CBC / BK / Troponin / PT / APTT / EKG / KŞ\nKontrastsız Beyin BT veya MR",
+    order: "ABC → O2 → KŞ ve KB normalize et → Nöroloji KONS/SEVK",
+    recete: "",
+    notes: "HT'yi SADECE >220/120 ise tedavi et"
+  },
+  "Aort Diseksiyonu": {
+    alan: "KIRMIZI",
+    istekler: "PAAG (mediastinal/aort genişleme)\nKontrastlı Toraks BT",
+    order: "Oral stop → KVC KONS/SEVK",
+    recete: "",
+    notes: "Hayatın en şiddetli ağrısı — ani başlangıç!\nMI / İnme / Parapleji ile gelebilir\nİki kol arasında TA farkı!"
+  },
+  "Bradikardi": {
+    alan: "KIRMIZI",
+    istekler: "EKG",
+    order: "O2 → Atropin 0.5mg IV push\n(3-5 dk'da tekrar, max 3mg/gün)",
+    recete: "",
+    notes: "Semptomatikse tedavi et"
+  },
+  "Kalp Tamponad": {
+    alan: "KIRMIZI",
+    istekler: "EKO (perikardiyal sıvı)",
+    order: "Acil perikardiyo santez → KVC KONS",
+    recete: "",
+    notes: "Beck Triadı: Hipotansiyon + Boyun veni dolgunluğu + Sessiz kalp\nPerikardiyal sıvı + Şok = Tamponad"
+  },
+  "Hızlı Sert Entübasyon": {
+    alan: "KIRMIZI",
+    istekler: "",
+    order: "HAZIRLIK: Kadın 7mm tüp (2-3 no) / Erkek 8mm tüp (3-4 no)\n→ O2 %100 maske/ambu\n→ İNDÜKSİYON: Fentanil 1-2mcg/kg IV + Profol 1-2mg/kg IV\n   VEYA Dormicium 0.1mg/kg IV\n→ PARALİZİ: Esmeron 1mg/kg IV push\n→ Pozisyon → Tüp trakeaya → Steteskopla teyit → Sonda",
+    recete: "",
+    notes: "Profol KONTRENDİKE: BP düşükse!\nSevk: Dormicium 0.02-0.1mg/kg/saat infüzyon 1000cc SF'de"
+  },
+  "Hipertansiyon": {
+    alan: "SARI",
+    istekler: "",
+    order: "Kapril 25mg oral → TEKRAR YOK\n→ Norvasc 10mg oral → TEKRAR YOK\n→ Kardiyoloji KONS",
+    recete: "",
+    notes: "HT ACİL = ≥180/120 + organ hasarı\nKapril KONTRENDİKE: anüri / böbrek yetmezliği\n>160/100 asemptomatik bile tedavi et"
+  },
+  "Astım-KOAH": {
+    alan: "SARI",
+    istekler: "",
+    order: "O2 nazal\n→ Ventolin 1amp (2.5mg) + Pulmicort 1amp nebül\n→ 20 dk sonra 2amp Ventolin tekrar\n→ Prednol 1mg/kg IV infüzyon\n→ Pantoprazol 1amp IV push\n→ Teobag 200mg 100cc IV infüzyon",
+    recete: "",
+    notes: "SAT <%93 ise aktif tedavi\nBakteriyal inf varsa AB ekle"
+  },
+  "Diabetik Ketoasidoz": {
+    alan: "SARI",
+    istekler: "CBC/BK\nTİT\nSONDA tak",
+    order: "1000cc SF IV bolus (1 saatte)\n→ K <5.5 ise her 1lt sıvıya 20-30 mEq KCl ekle\n→ Endokrin KONS/SEVK",
+    recete: "",
+    notes: "KŞ >250 + pH <7.3 + HCO3 <15"
+  },
+  "Hiperglisemik Hiperosmolar": {
+    alan: "SARI",
+    istekler: "CBC/BK\nTİT\nSONDA tak",
+    order: "1000cc SF IV bolus (1 saatte)\n→ Endokrin KONS/SEVK",
+    recete: "",
+    notes: "KŞ >600, Asidoz/Keton YOK"
+  },
+  "Akut Böbrek Yetmezliği": {
+    alan: "SARI",
+    istekler: "CBC/BK + TİT + Kan Gazı\nEKG + PAAG",
+    order: "ABC → Oral stop → Nefroloji KONS/SEVK",
+    recete: "",
+    notes: "Kriter: Krea 48 saatte ≥0.3 artış / 7 günde 1.5x / 6 saat oligüri\nAcil diyaliz: üremik semptom, aşırı volüm, ağır asidoz, ağır hiperkalemi"
+  },
+  "Pyelonefrit": {
+    alan: "SARI",
+    istekler: "CBC/BK/CRP\nTİT / gram / kültür",
+    order: "1000cc SF'de Desefin (Sefriakson) 1000mg IV\n→ Uzman danış / Yatır",
+    recete: "Cipro 500mg 14tb 2×1\nArveles 25mg 20tb 2×1",
+    notes: ""
+  },
+  "GİS Kanaması": {
+    alan: "SARI",
+    istekler: "CBC/BK/CRP + APTT\nKan Grubu + Gaitada Gizli Kan + Rektal Tuşe",
+    order: "NG sonda + İdrar sondası + Oral stop\n→ 1000cc RL/SF\n→ Pantoprazol 2amp (80mg) IV push 2 dk'da\n→ Pantoprazol 8mg/saat IV infüzyon\n→ Gastro KONS/SEVK",
+    recete: "",
+    notes: "Hematemez varsa önce PAAG (akciğer mi?)"
+  },
+  "Preeklampsi": {
+    alan: "SARI",
+    istekler: "CBC/BK + TİT",
+    order: "Kadın Doğum KONS / 112 İcap",
+    recete: "",
+    notes: "Gebelik >20. hafta + HT (>140/90) + proteinüri\nCiddi: nöbet, görme boz., epigastrik ağrı, trombositopeni"
+  },
+  "Status Epileptikus": {
+    alan: "SARI",
+    istekler: "KŞ + CBC/BK + EKG + Kan Gazı",
+    order: "ABC → O2\n→ Diazem 0.15-0.2mg/kg IV push 2dk'da (10cc SF'de)\n   VEYA Dormicium 0.1-0.15mg/kg IV push 2dk'da\n→ 5-10 dk bekle → TEKRAR\n→ Fenitoin 15-20mg/kg 100cc SF'de IV inf (max 50mg/dk)\n→ KONS/SEVK",
+    recete: "",
+    notes: "Entübasyon malzemesi hazırla!\nDiazem max tek seferinde 10mg, toplam 30mg\nDormicium max tek seferinde 5mg, toplam 15mg\nDamar yolu yoksa: Diazem rektal 0.2mg/kg / Dormicium IM 0.2mg/kg / Dormicium 10mg intranasal"
+  },
+  "KKKA": {
+    alan: "SARI",
+    istekler: "CBC",
+    order: "Keneyi güvenli çıkar + antiseptik uygula\n→ CBC normal + şikayetsiz: bilgi vererek taburcu\n→ CBC anormal (trombositopeni) veya ≥2 semptom: Uzman/SEVK",
+    recete: "",
+    notes: "Kırım Kongo Kanamalı Ateşi\nKene teması sorgulanmalı!"
+  },
+  "Yanık": {
+    alan: "SARI",
+    istekler: "",
+    order: "Soğutma (suyla) → Temizlik (suyla)\n→ Pansuman (Bactroban/Furacin/Basitrasin/Neomisin)\n→ Analjezik (ibuprofen)\n\n1°: nemlendirici + analjezik\n2° yüzeysel: %0.2 Nitrofürazan pomad\n2° derin: AB krem → Yanık merkezi?\n3-4°: Yanık ünitesi — SEVK",
+    recete: "",
+    notes: "Tetanoz profilaksisi!\n<3 doz/bilinmiyor — temiz/küçük: aşı; diğer: aşı+Ig\n≥3 doz — temiz: son doz>10yıl → aşı; diğer: son doz>5yıl → aşı"
+  },
+  "Kuduz Risk Teması": {
+    alan: "SARI",
+    istekler: "",
+    order: "Adli rapor yaz → Bol sabun-suyla yıka\n→ Tetanoz aşısı\n→ Kuduz aşısı: 0 / 3 / 7 / 14. günler\n→ Kuduz İmmünoglobulin: yara içine/çevresine (gerekirse IM)",
+    recete: "Klamoks 1000mg 2×1",
+    notes: "Ig'yi yara içine/çevresine uygula\nDikiş gerekiyorsa Ig'den ≥2 saat sonra yap"
+  },
+  "Akut Pankreatit": {
+    alan: "SARI",
+    istekler: "CBC/BK/B-HCG/CRP\nTİT + ADBG/PAAG",
+    order: "Oral stop → 500cc SF IV inf\n→ Gastro KONS/SEVK",
+    recete: "",
+    notes: "%90 taş/alkol ilişkili. Amilaz/Lipaz yüksek\nDefans/Rebound YOK (olursa perforasyon düşün)"
+  },
+  "Akut Apandisit": {
+    alan: "SARI",
+    istekler: "Alvarado Skoru\nCBC/BK/B-HCG/CRP + TİT\nADBG/PAAG → USG → Kontrastlı BT",
+    order: "Oral stop → 500cc SF IV inf\n→ Genel Cerrahi KONS/SEVK",
+    recete: "",
+    notes: "McBurney noktası hassasiyeti, Rovsing, Psoas bulguları"
+  },
+  "Akut Kolesistit": {
+    alan: "SARI",
+    istekler: "Tokyo Kriterleri\nCBC/BK/B-HCG/CRP + TİT\nADBG/PAAG → USG → Kontrastlı BT",
+    order: "Oral stop → 500cc SF IV inf\n→ Genel Cerrahi KONS/SEVK",
+    recete: "",
+    notes: "Murphy's sign pozitif\nSarılık + ateş + sağ üst kadran ağrısı = Charcot triadı"
+  },
+  "GİS Perforasyon": {
+    alan: "SARI",
+    istekler: "CBC/BK/CRP + Cross + Kan Grubu\nPAAG / ADBG",
+    order: "Oral stop → 500cc SF IV inf\n→ Genel Cerrahi KONS/SEVK",
+    recete: "",
+    notes: "Diyafram altında hava! PAAG'da serbest hava klasik bulgudur"
+  },
+  "İleus": {
+    alan: "SARI",
+    istekler: "CBC/BK + ADBG + PAAG",
+    order: "Oral stop + NG sonda + 1000cc RL/SF\n→ Genel Cerrahi KONS/SEVK",
+    recete: "",
+    notes: ""
+  },
+  "Sistit": {
+    alan: "YEŞİL",
+    istekler: "TİT (WBC yüksek)\nİdrar kültür",
+    order: "",
+    recete: "Monurol şase 1×1 tek doz\nVEYA Cipro 500mg 14tb 2×1 (7 gün)",
+    notes: "Monurol: gebelikte tercih\nKomplike/erkek → Cipro tercih"
+  },
+  "Epistaksis": {
+    alan: "YEŞİL",
+    istekler: "CBC / PT / APTT",
+    order: "ABC → Vital\n→ Burun sümkürt + İliadin sprey\n→ Kanatları 15 dk sık\n→ Durdu: Thiocilin deri pomad ile taburcu\n→ Durmadı: AB + Adrenalin + Lidokain (±Traneksamik asit) tamponu — 2 günde çıkar\n→ Hala devam: KBB",
+    recete: "Thiocilin deri pomad 3×1\nKlamoks 1000mg 10tb 2×1",
+    notes: "Etiyoloji: travma, HT, ilaç, kanama diyatezi, neoplazi"
+  },
+  "Miyalji": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "Dikloron 1amp + Muscoril 1amp IM",
+    recete: "Emulid plus jel 2×1\nMuscoflex duo tb 75/8mg 2×1",
+    notes: "Dikloron KONTRENDİKE: karaciğer/böbrek yetmezliği"
+  },
+  "Burkulma": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "1) Fastjel jel 2×1\n2) Muscoril jel 2×1\n3) Lasonil jel 2×1\n4) Parol tb 4×1",
+    notes: ""
+  },
+  "Başağrısı": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "Gerilim: Dikloron/Arveles/Parol 1amp IM\nMigren: Arveles 1amp IM + Zofran/Dramamine 1amp IM\n⚠️ Metpamid KONTRENDİKE migrenede",
+    recete: "Migren: Dexepass 25/300mg 20tb 2×1\nVEYA Apranax Plus 2×1",
+    notes: "RED FLAGS:\n• SAK: hayatın en şiddetlisi, ani, bulantı-kusma, şuur\n• Menenjit: ateş + ense sertliği + şuur bozukluğu\n• Küme: unilateral orbital + otonom bulgular\n• HT acil: TA ≥180/120"
+  },
+  "Vertigo": {
+    alan: "YEŞİL",
+    istekler: "KŞ + EKG + CBC/BK/Troponin\nNörolojik muayene",
+    order: "500cc SF'de 2amp Nootropil + 1amp Dramamine IV inf (1 saat)\n→ KBB kontrol",
+    recete: "",
+    notes: ""
+  },
+  "Gastrit": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "1amp Pantoprazol IV push (2dk)\n+ Gaviscon 200ml susp oral (2 ölçek)",
+    recete: "Pantactive 40mg 14tb 1×1\nPronat 200ml oral susp 2×1",
+    notes: ""
+  },
+  "Viral Gastroenterit": {
+    alan: "YEŞİL",
+    istekler: "CBC/BK/VKG\nGaita kültür/mikro/parazit",
+    order: "1amp Buscopan + 1amp Arveles IM\nVEYA 500cc SF'de 1amp Buscopan + 1amp Arveles IV",
+    recete: "Buscopan 10mg 20tb 3×1\nReflor 250mg 10 şase 1×1\nParol 500mg 20tb 2×2",
+    notes: "Metpamid tercih edilmez!\nAyran / çorba / muz / yoğurt / haşlanmış patates / pirinç öner"
+  },
+  "Bakteriyel Gastroenterit": {
+    alan: "YEŞİL",
+    istekler: "CBC/BK/VKG\nGaita kültür/mikro/parazit",
+    order: "1amp Buscopan + 1amp Arveles IM\nVEYA 500cc SF'de IV inf\nKanlı ishal → Uzman danış",
+    recete: "Buscopan 10mg 20tb 3×1\nReflor 250mg 10 şase 1×1\nParol 500mg 20tb 2×2\nCipro 500mg 14tb 2×1",
+    notes: "Metpamid tercih edilmez!\nWBC → EIEC/Salmonella/Shigella/Campylobacter"
+  },
+  "Paraziter Gastroenterit": {
+    alan: "YEŞİL",
+    istekler: "CBC/BK/VKG\nGaita kültür/mikro/parazit",
+    order: "1amp Buscopan + 1amp Arveles IM\nVEYA 500cc SF'de IV inf\nKanlı ishal → Uzman danış",
+    recete: "Buscopan 10mg 20tb 3×1\nReflor 250mg 10 şase 1×1\nParol 500mg 20tb 2×2\nFlagyl 500mg:\n  • Giardia: 2×1 5 gün\n  • E. Histolitika: 3×1 10 gün",
+    notes: "RBC → E. Histolitika / Shigella"
+  },
+  "Kabızlık": {
+    alan: "YEŞİL",
+    istekler: "ADBG",
+    order: "B.T. ENEMA 135 lavman rektal 1 tüp",
+    recete: "Duphalac şurup 670mg 300ml — 3×4 ölçek (2ml/kg/gün)",
+    notes: ""
+  },
+  "Akut Otitis Media": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Klamoks 1000mg 10tb 2×1 (10 günlük)\nParol 500mg 20tb 3×2",
+    notes: "Kulak zarı: şişkinlik + hiperemik + opaklaşma"
+  },
+  "Akut Otitis Externa": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Spirogut damla 2×4 (7 günlük)\nArveles 25mg tb 2×1",
+    notes: "Kulak zarında delinme varsa Gentagut KONTRENDİKE"
+  },
+  "Sinüzit": {
+    alan: "YEŞİL",
+    istekler: "Waters grafisi (sinüs dolgunluğu)",
+    order: "",
+    recete: "Arveles 25mg 20tb 2×1\nKlamoks 1000mg 10tb 2×1",
+    notes: ""
+  },
+  "Bakteriyel Tonsillofarenjit": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "1amp Dikloron IM",
+    recete: "Ibucold tb 3×1\nOrtivin burun sprey 3×1\nKloroben gargara 3×1\nKlamoks 1000mg 14tb 2×1\nVEYA Deposilin 1.2 Milyon IU IM 1×1",
+    notes: "Centor skoru kullan. Devam ederse EBV düşün\nIlık duş + bez uygulama + bol sıvı"
+  },
+  "Viral Tonsillofarenjit": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "1amp Dikloron IM",
+    recete: "Ibucold tb 3×1\nOrtivin burun sprey 3×1\nKloroben gargara 3×1",
+    notes: "Ilık duş + bez uygulama + bol sıvı. Antibiyotik gerekmez."
+  },
+  "Bakteriyel Konjonktivit": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Tobrased damlası 4×1-2 (7-10 günlük)",
+    notes: "Mukopürülan akıntı karakteristik"
+  },
+  "Viral Konjonktivit": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Detofen göz damlası 2×1\nSıcak/soğuk kompresyon",
+    notes: ""
+  },
+  "Alerjik Rinit": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Bilaxten tb 1×1\nNasonex sprey 1×2 puf (semptom geçince 1×1 puf)\nGöz yaşarması varsa: Patanol %0.1 oft sol 2×1 damla",
+    notes: ""
+  },
+  "Periferik Fasiyal Paralizi": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Valtrex 1000mg 2×1\nAsiviral 3×1\nDolorex 3×1\nKBB poliklinik yönlendir",
+    notes: ""
+  },
+  "Arpacık": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Gentagut damla 4×4\nTerramycin pomad 1×1 (yatmadan)\nSıcak pansuman günde 3 kez\nAğrı için Parol tb 4×1",
+    notes: ""
+  },
+  "Aft": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Andorex gargara 4×1 (6 yaş altında kullanılmaz)\nCalgel jel 3×1 (yemekten 15dk önce)\nKenacort orabase pomad 3×1 (yemekten sonra)",
+    notes: "Sık tekrarlayan aftlarda Behçet hastalığı için sevk"
+  },
+  "Anal Fissür": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Anestol pomad 2×1\nMadecassol pomad 2×1\nOsmolac şurup 2×1 (kabızlık varsa)\nDolorex 3×1\nHer akşam sıcak suda oturma seansı",
+    notes: "Posalı yiyecekler tüketilmesi önerilir"
+  },
+  "Konstipasyon": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Osmolac şurup 1×1\nProctoglyvenol krem 2×1",
+    notes: ""
+  },
+  "Demir Eksikliği Anemisi": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "",
+    recete: "Ferrosanol duodenal kaps 1×1 (tok karnına)\nDerin anemi: 2×1",
+    notes: ""
+  }
+};
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function nav(pageId, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  if (el) el.classList.add('active');
+  if (pageId === 'hizli') buildDxGrid();
+}
+
+function navDx(name) {
+  nav('hizli', null);
+  document.querySelectorAll('.nav-item').forEach(i => {
+    i.classList.toggle('active', i.getAttribute('onclick') === `navDx('${name}')`);
+  });
+  showDx(name);
+}
+
+// ============================================================
+// ANALIZ
+// ============================================================
+const SYSTEM_PROMPT = `Sen Yüksekova Devlet Hastanesi acil servisinde çalışan bir pratisyen hekim asistanısın.
+
+Aşağıda doktorun KİŞİSEL Notion veritabanındaki ACIL YAKLAŞIM kayıtları verilmiştir. Bu verileri BİRİNCİL rehber olarak kullan:
+
+=== NOTION VERİTABANI ===
+ANAFİLAKSİ (KIRMIZI): Order: 500cc SF IV + ADRENALİN 0.5mg IM (tekrar 5-15dk) + Ventolin nebül + Avil IV + Prednol 1mg/kg IV + Pantoprazol IV → Uzman. Reçete: Bilaxten 1×1 5gün. Not: 8-10 saat monitörize, pediyatrik yarı doz.
+STEMI (KIRMIZI): Tetkik: EKG ST elevasyonu + Troponin (sevk troponin gelmeden). Order: O2 → Aspirin 300mg çiğne → Plavix 600mg → Pantoprazol IV → Heparx 5000U IV VEYA Clexane SC → İsordil 5mg → Morfin 3mg IV → ANJİYO SEVK.
+NSTEMI (KIRMIZI): Troponin 0/2/8.saat, ST elevasyonu YOK. Order: O2 → Aspirin → Pantoprazol IV → Heparin IV VEYA Clexane SC → İsordil 5mg × 3 → Morfin → KONS. İsordil KONTRENDİKE hipotansiyon/sağMI/bradikardide.
+PE (KIRMIZI): CBC/BK/CRP + EKG + PAAG → Toraks BT Anjio. O2 → Göğüs Hastalıkları KONS.
+SVO (KIRMIZI): CBC/BK/Trop/PT/APTT/EKG/KŞ + Kontrastsız Beyin BT/MR. ABC → O2 → Nöroloji KONS. HT'yi SADECE >220/120'de tedavi et.
+AORT DİSEKSİYONU (KIRMIZI): PAAG + Kontrastlı Toraks BT. Oral stop → KVC KONS. İki kol TA farkı!
+BRADİKARDİ (KIRMIZI): EKG. O2 → Atropin 0.5mg IV (tekrar 3-5dk, max 3mg).
+KALP TAMPONAD (KIRMIZI): Perikardiyal sıvı + şok. Perikardiyosentez + KVC KONS.
+HIZ SERT ENTÜBASYON (KIRMIZI): Fentanil 1-2mcg/kg + Profol 1-2mg/kg VEYA Dormicium 0.1mg/kg + Esmeron 1mg/kg IV. Profol KONTRENDİKE düşük BP'de.
+HİPERTANSİYON (SARI): Kapril 25mg oral (TEKRAR YOK) → Norvasc 10mg (TEKRAR YOK) → Kons. Kapril KONTRENDİKE anüri/böb. yet. HT ACİL=≥180/120+organ hasarı.
+ASTİM-KOAH (SARI): O2 → Ventolin+Pulmicort nebül → 20dk sonra 2amp Ventolin → Prednol 1mg/kg IV → Pantoprazol IV → Teobag 200mg IV.
+DİABETİK KETOASİDOZ (SARI): CBC/BK + TİT + SONDA. 1000cc SF bolus → KCl if K<5.5 → Endokrin KONS. KŞ>250+pH<7.3+HCO3<15.
+HİPERGLİSEMİK HİPEROSMOLAR (SARI): KŞ>600 asidoz/keton YOK. 1000cc SF bolus → Endokrin KONS.
+AKUT BÖBREK YETMEZLİĞİ (SARI): CBC/BK+TİT+Kan Gazı+EKG+PAAG. Oral stop → Nefroloji KONS.
+PYELONEFRİT (SARI): CBC/BK/CRP+TİT/gram/kültür. 1000cc SF'de Desefin 1g IV → Yatır. Reçete: Cipro 500mg 2×1 14gün + Arveles 2×1.
+GİS KANAMASI (SARI): CBC/BK/CRP+APTT+Kan Grubu+Gaitada GizliKan. NG+sonda+oral stop → SF → Pantoprazol 80mg IV push → 8mg/saat inf → Gastro KONS.
+PREEKLAMPSİ (SARI): CBC/BK+TİT. K/D KONS/112 icap.
+STATUS EPİLEPTİKUS (SARI): KŞ+CBC/BK+EKG+Kan Gazı. Diazem 0.15-0.2mg/kg IV VEYA Dormicium 0.1mg/kg IV → bekle 5-10dk → tekrar → Fenitoin 15-20mg/kg 100cc SF'de → KONS.
+KKKA (SARI): CBC. Kene çıkar → CBC normal: taburcu; CBC anormal/2+semptom: Uzman.
+YANIK (SARI): Soğut(su)→Temizle(su)→Pansuman(Bactroban/Furacin)→Analjezik. Tetanoz profilaksisi şart!
+KUDUZ (SARI): Adli + sabun-suyla yıka → Tetanoz aşısı → Kuduz aşısı 0/3/7/14 → Kuduz Ig yara içine. Reçete: Klamoks 1000mg 2×1.
+AKUT PANKREATİT (SARI): CBC/BK/B-HCG/CRP+TİT+ADBG/PAAG. Oral stop → 500cc SF → Gastro KONS. Amilaz/Lipaz yüksek.
+AKUT APANDİSİT (SARI): Alvarado+CBC/BK/B-HCG/CRP+TİT+ADBG→USG→Kontrastlı BT. Oral stop → 500cc SF → GC KONS.
+AKUT KOLESİSTİT (SARI): Tokyo Kriterleri+CBC/BK/B-HCG/CRP+TİT+USG. Oral stop → 500cc SF → GC KONS. Murphy pozitif.
+GİS PERFORASYON (SARI): CBC+Kan Grubu+PAAG/ADBG. Diyafram altı hava! Oral stop → 500cc SF → GC KONS.
+İLEUS (SARI): CBC/BK+ADBG+PAAG. Oral stop+NG+1000cc SF → GC KONS.
+SİSTİT (YEŞİL): TİT+kültür. Reçete: Monurol şase tek doz VEYA Cipro 500mg 2×1 7gün. Monurol gebelikte iyi.
+EPİSTAKSİS (YEŞİL): CBC/PT/APTT. İliadin → 15dk sık → durdu: Thiocilin pomad taburcu; durmadı: Adrenalin+Lidokain tamponu → KBB. Reçete: Thiocilin 3×1 + Klamoks 1000mg 2×1 10gün.
+MİYALJİ (YEŞİL): Dikloron+Muscoril IM. Reçete: Emulid plus jel 2×1 + Muscoflex duo 75/8mg 2×1. Dikloron KONTRENDİKE: KC/böb. yet.
+BURKULMA (YEŞİL): Fastjel 2×1 + Muscoril jel 2×1 + Lasonil jel 2×1 + Parol 4×1.
+BAŞAĞRISI (YEŞİL): Gerilim: Dikloron/Arveles/Parol IM. Migren: Arveles IM + Zofran/Dramamine IM [Metpamid KONTRENDİKE]. Reçete: Dexepass 25/300mg 2×1 VEYA Apranax Plus 2×1. RED FLAGS: SAK, Menenjit, Küme, HT acil.
+VERTİGO (YEŞİL): KŞ+EKG+CBC/Trop. 500cc SF'de 2amp Nootropil+1amp Dramamine IV 1 saat → KBB kont.
+GASTRİT (YEŞİL): Pantoprazol IV push + Gaviscon 200ml oral. Reçete: Pantactive 40mg 1×1 + Pronat 200ml 2×1.
+VİRAL GASTROENTERİT (YEŞİL): Buscopan+Arveles IM. Reçete: Buscopan 10mg 3×1 + Reflor 250mg 1×1 + Parol 500mg 2×2. Metpamid tercih edilmez.
+BAKTERİYEL GASTROENTERİT (YEŞİL): Buscopan+Arveles IM. Reçete: Buscopan 3×1 + Reflor 1×1 + Parol 2×2 + Cipro 500mg 2×1. Kanlı ishal → uzman.
+PARAZİTER GASTROENTERİT (YEŞİL): Buscopan+Arveles IM. Flagyl: Giardia 2×1 5gün, E.Histolitika 3×1 10gün.
+KABIZLIK (YEŞİL): ADBG. Enema rektal. Duphalac 3×4 ölçek.
+AKUT OTİTİS MEDİA (YEŞİL): Klamoks 1000mg 2×1 10gün + Parol 3×2. Kulak zarı hiperemik/opak.
+AKUT OTİTİS EKSTERNA (YEŞİL): Spirogut damla 2×4 7gün + Arveles 2×1. Kulak zarı delinmişse Gentagut KONTRENDİKE.
+SİNÜZİT (YEŞİL): Waters grafisi. Arveles 2×1 + Klamoks 1000mg 2×1.
+BAKTERİYEL TONSİLLOFARENJİT (YEŞİL): Dikloron IM. Reçete: Ibucold 3×1 + Ortivin 3×1 + Kloroben gargara 3×1 + Klamoks 1000mg 2×1 14gün VEYA Deposilin 1.2 Milyon IU IM.
+VİRAL TONSİLLOFARENJİT (YEŞİL): Dikloron IM. Reçete: Ibucold 3×1 + Ortivin 3×1 + Kloroben gargara 3×1. AB gerekmez.
+BAKTERİYEL KONJONKTİVİT (YEŞİL): Tobrased damlası 4×1-2 7-10gün. Mukopürülan akıntı.
+VİRAL KONJONKTİVİT (YEŞİL): Detofen göz damlası 2×1 + kompresyon.
+ALERJİK RİNİT (YEŞİL): Bilaxten 1×1 + Nasonex sprey 1×2puf + Göz için Patanol %0.1 2×1.
+PERİFERİK FASİYAL PARALİZİ (YEŞİL): Valtrex 1000mg 2×1 + Asiviral 3×1 + Dolorex 3×1 + KBB polikliniği.
+ARPACIK (YEŞİL): Gentagut damla 4×4 + Terramycin pomad 1×1 gece + sıcak pansuman 3×/gün + Parol 4×1.
+AFT (YEŞİL): Andorex gargara 4×1 + Calgel jel 3×1 yemekten önce + Kenacort orabase 3×1 yemekten sonra. Sık tekrarda Behçet şüphesi → sevk.
+ANAL FİSSÜR (YEŞİL): Anestol pomad 2×1 + Madecassol 2×1 + Osmolac şurup 2×1 + Dolorex 3×1. Sıcak oturma banyosu.
+KONSTİPASYON (YEŞİL): Osmolac şurup 1×1 + Proctoglyvenol krem 2×1.
+DEMİR EKSİKLİĞİ ANEMİSİ (YEŞİL): Ferrosanol duodenal kaps 1×1 tok karnına (derin anemi: 2×1).
+=== BİTİŞ ===
+
+Kanıta dayalı cevap ver: Türk ACİL tıp kılavuzları, ACEP, ESC/ESH rehberlerine uygun.
+Türkiye acil servisinde mevcut ilaçları kullan. Notion veritabanındaki ilaç isimlerini ve dozları aynen kullan.
+
+CEVAP FORMATI — Bu başlıkları AYNEN kullan:
+
+## 🎯 ACİL SEVİYESİ
+[KIRMIZI/SARI/YEŞİL] — kısa gerekçe
+
+## 📋 OLASI TANILAR
+1. [En olası] — gerekçe
+2. [İkinci olası] — gerekçe
+3. [Ekarte edilmesi gereken tehlikeli tanı] — gerekçe
+
+## ⚠️ DİKKAT EDİLMESİ GEREKENLER
+**Hikayede sorulacaklar:**
+- soru
+**Muayenede:**
+- bulgu
+**Red flags:**
+- işaret
+
+## 🔬 İSTENECEK TETKİKLER
+**Kan:** ...
+**Görüntüleme:** ...
+**Diğer:** ...
+
+## 💉 ORDER
+[Sırasıyla, doz ve yol ile]
+
+## 💊 REÇETE
+[İlaç - doz - kullanım - süre]
+
+## 📝 NOTLAR
+[Yatış/taburculuk/konsültasyon kararı, kontrendikasyonlar]`;
+
+function getApiKey() {
+  return localStorage.getItem('acil_api_key') || '';
+}
+
+function saveKey() {
+  const k = document.getElementById('api-key-input').value.trim();
+  if (k) {
+    localStorage.setItem('acil_api_key', k);
+    document.getElementById('key-status').textContent = '✓ Anahtar kaydedildi.';
+    document.getElementById('key-status').style.color = 'var(--green)';
+  }
+}
+
+function clearAnaliz() {
+  document.getElementById('hasta-input').value = '';
+  document.getElementById('result-area').innerHTML = '';
+  document.getElementById('how-block').classList.remove('hidden');
+}
+
+function getLvl(text) {
+  if (/kirmizi|kırmızı/i.test(text)) return 'KIRMIZI';
+  if (/sari|sarı/i.test(text)) return 'SARI';
+  return 'YEŞİL';
+}
+
+function renderResult(text) {
+  const lvl = getLvl(text);
+  const lvlMap = { KIRMIZI: ['t-kirmizi', '🔴 KIRMIZI'], SARI: ['t-sari', '🟡 SARI'], YEŞİL: ['t-yesil', '🟢 YEŞİL'] };
+  const [cls, label] = lvlMap[lvl];
+
+  const sections = [
+    { key: 'ACİL SEVİYESİ', icon: '🎯', color: '#e63946' },
+    { key: 'OLASI TANILAR', icon: '📋', color: '#f4a261' },
+    { key: 'DİKKAT EDİLMESİ GEREKENLER', icon: '⚠️', color: '#7f77dd' },
+    { key: 'İSTENECEK TETKİKLER', icon: '🔬', color: '#378add' },
+    { key: 'ORDER', icon: '💉', color: '#e63946' },
+    { key: 'REÇETE', icon: '💊', color: '#2d6a4f' },
+    { key: 'NOTLAR', icon: '📝', color: '#f4a261' },
+  ];
+
+  let html = `<div class="result-card">
+    <div class="result-header">
+      <span class="triage-badge ${cls}">${label}</span>
+      <span style="font-size:12px;color:var(--text-faint);font-family:var(--mono)">${new Date().toLocaleTimeString('tr-TR')}</span>
+    </div>`;
+
+  sections.forEach(s => {
+    const rx = new RegExp(`##[^#]*${s.key}[\\s\\S]*?(?=##|$)`, 'i');
+    const m = text.match(rx);
+    if (m) {
+      let content = m[0].replace(/##[^\n]*\n/, '').trim();
+      content = content.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      html += `<div class="result-section">
+        <div class="rs-title">
+          <span class="rs-dot" style="background:${s.color}"></span>
+          ${s.icon} ${s.key}
+        </div>
+        <div class="rs-body">${content}</div>
+      </div>`;
+    }
+  });
+
+  html += '</div>';
+  return html;
+}
+
+async function analyze() {
+  const input = document.getElementById('hasta-input').value.trim();
+  if (!input) return;
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    alert('Lütfen önce Hakkında sayfasından API anahtarınızı girin.');
+    nav('about', null);
+    return;
+  }
+
+  document.getElementById('how-block').classList.add('hidden');
+  document.getElementById('result-area').innerHTML = `
+    <div class="result-card">
+      <div class="loading-row">
+        <div class="spinner"></div>
+        Hasta bilgileri değerlendiriliyor, Notion veritabanı baz alınarak analiz yapılıyor...
+      </div>
+    </div>`;
+
+  const btn = document.getElementById('analyze-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Analiz ediliyor...';
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1500,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: `Aşağıdaki hastayı değerlendir:\n\n${input}` }]
+      })
+    });
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message);
+    const result = data.content?.map(b => b.text || '').join('') || 'Yanıt alınamadı.';
+    document.getElementById('result-area').innerHTML = renderResult(result);
+  } catch (e) {
+    document.getElementById('result-area').innerHTML = `
+      <div class="result-card">
+        <div class="result-section" style="color:var(--red)">
+          ⚠️ Hata: ${e.message}<br>
+          <small style="color:var(--text-muted)">API anahtarınızı kontrol edin (Hakkında sayfası).</small>
+        </div>
+      </div>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = '🔍 Analiz Et';
+}
+
+// ============================================================
+// HIZLI BAKIM
+// ============================================================
+let selectedDx = null;
+
+function buildDxGrid(filter = '') {
+  const grid = document.getElementById('dx-grid');
+  const fl = filter.toLowerCase();
+  const colorMap = { KIRMIZI: 'sel', SARI: 'sel-a', YEŞİL: 'sel-g' };
+  const catMap = { KIRMIZI: '🔴 Kırmızı', SARI: '🟡 Sarı', YEŞİL: '🟢 Yeşil' };
+  grid.innerHTML = Object.entries(DB)
+    .filter(([k]) => !fl || k.toLowerCase().includes(fl))
+    .map(([k, v]) => {
+      const sel = selectedDx === k ? colorMap[v.alan] : '';
+      return `<div class="dx-btn ${sel}" onclick="showDx('${k.replace(/'/g, "\\'")}')">
+        <div class="dx-cat">${catMap[v.alan]}</div>
+        <div class="dx-name">${k}</div>
+      </div>`;
+    }).join('');
+}
+
+function filterDx() {
+  buildDxGrid(document.getElementById('dx-search').value);
+}
+
+function showDx(name) {
+  selectedDx = name;
+  buildDxGrid(document.getElementById('dx-search')?.value || '');
+  const d = DB[name];
+  if (!d) return;
+  const badgeCls = { KIRMIZI: 't-kirmizi', SARI: 't-sari', YEŞİL: 't-yesil' };
+  const em = { KIRMIZI: '🔴', SARI: '🟡', YEŞİL: '🟢' };
+
+  let html = `<div class="detail-card">
+    <div class="detail-header">
+      <div class="detail-title">${em[d.alan]} ${name}</div>
+      <span class="triage-badge ${badgeCls[d.alan]}">${d.alan}</span>
+      <span class="notion-pill">Notion</span>
+    </div>`;
+
+  const rows = [
+    { label: '🔬 Tetkikler', val: d.istekler },
+    { label: '💉 Order (Acil Müdahale)', val: d.order },
+    { label: '💊 Reçete', val: d.recete },
+    { label: '📝 Notlar / Kontrendikasyonlar', val: d.notes },
+  ];
+
+  rows.forEach(r => {
+    if (r.val && r.val !== '—') {
+      html += `<div class="detail-row">
+        <div class="dr-label">${r.label}</div>
+        <div class="dr-value">${r.val}</div>
+      </div>`;
+    }
+  });
+
+  html += '</div>';
+  document.getElementById('dx-detail').innerHTML = html;
+  document.getElementById('dx-detail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// Init
+buildDxGrid();
+
+// Load saved key hint
+window.addEventListener('DOMContentLoaded', () => {
+  const k = getApiKey();
+  if (k) {
+    document.getElementById('key-status').textContent = '✓ Kayıtlı anahtar mevcut.';
+    document.getElementById('key-status').style.color = 'var(--green)';
+  }
+});
+</script>
+</body>
+</html>
