@@ -467,7 +467,7 @@
     </div>
   </div>
   <div class="header-chips">
-    <span class="chip chip-red">40+ Yaklaşım</span>
+    <span class="chip chip-red">57 Yaklaşım</span>
     <span class="chip">Kişisel Veritabanı</span>
   </div>
 </header>
@@ -497,6 +497,14 @@
     <div class="nav-item" onclick="navDx('Bradikardi')"><span class="nav-dot nd-r"></span>Bradikardi</div>
     <div class="nav-item" onclick="navDx('Kalp Tamponad')"><span class="nav-dot nd-r"></span>Kalp Tamponad</div>
     <div class="nav-item" onclick="navDx('Hızlı Sert Entübasyon')"><span class="nav-dot nd-r"></span>Hızlı Sert Entüb.</div>
+    <div class="nav-item" onclick="navDx('AF (Atriyal Fibrilasyon)')"><span class="nav-dot nd-r"></span>AF (Atriyal Fib.)</div>
+    <div class="nav-item" onclick="navDx('VF / Pulseless VT')"><span class="nav-dot nd-r"></span>VF / Pulseless VT</div>
+    <div class="nav-item" onclick="navDx('Unstabil Taşikardi')"><span class="nav-dot nd-r"></span>Unstabil Taşikardi</div>
+    <div class="nav-item" onclick="navDx('Stabil Taşikardi (Dar QRS)')"><span class="nav-dot nd-r"></span>Stabil Taşikardi</div>
+    <div class="nav-item" onclick="navDx('Pnömotoraks')"><span class="nav-dot nd-r"></span>Pnömotoraks</div>
+    <div class="nav-item" onclick="navDx('Kardiyojenik Akciğer Ödemi')"><span class="nav-dot nd-r"></span>Kardiyojenik AKÖ</div>
+  </div>
+    <div class="nav-item" onclick="navDx('Eklampsi')"><span class="nav-dot nd-r"></span>Eklampsi</div>
   </div>
   <div class="nav-section">
     <div class="nav-label">🟡 Sarı Alan</div>
@@ -508,6 +516,7 @@
     <div class="nav-item" onclick="navDx('Pyelonefrit')"><span class="nav-dot nd-a"></span>Pyelonefrit</div>
     <div class="nav-item" onclick="navDx('GİS Kanaması')"><span class="nav-dot nd-a"></span>GİS Kanaması</div>
     <div class="nav-item" onclick="navDx('Preeklampsi')"><span class="nav-dot nd-a"></span>Preeklampsi</div>
+    <div class="nav-item" onclick="navDx('Göğüs Ağrısı (Genel Yaklaşım)')"><span class="nav-dot nd-a"></span>Göğüs Ağrısı Yaklaşım</div>
     <div class="nav-item" onclick="navDx('Status Epileptikus')"><span class="nav-dot nd-a"></span>Status Epileptikus</div>
     <div class="nav-item" onclick="navDx('KKKA')"><span class="nav-dot nd-a"></span>KKKA</div>
     <div class="nav-item" onclick="navDx('Yanık')"><span class="nav-dot nd-a"></span>Yanık</div>
@@ -517,6 +526,11 @@
     <div class="nav-item" onclick="navDx('Akut Kolesistit')"><span class="nav-dot nd-a"></span>Akut Kolesistit</div>
     <div class="nav-item" onclick="navDx('GİS Perforasyon')"><span class="nav-dot nd-a"></span>GİS Perforasyon</div>
     <div class="nav-item" onclick="navDx('İleus')"><span class="nav-dot nd-a"></span>İleus</div>
+    <div class="nav-item" onclick="navDx('Pnömoni')"><span class="nav-dot nd-a"></span>Pnömoni</div>
+    <div class="nav-item" onclick="navDx('Renal Kolik')"><span class="nav-dot nd-a"></span>Renal Kolik</div>
+    <div class="nav-item" onclick="navDx('Hipoglisemi')"><span class="nav-dot nd-a"></span>Hipoglisemi</div>
+    <div class="nav-item" onclick="navDx('Hiperglisemi (Basit)')"><span class="nav-dot nd-a"></span>Hiperglisemi</div>
+    <div class="nav-item" onclick="navDx('Menenjit')"><span class="nav-dot nd-a"></span>Menenjit</div>
   </div>
   <div class="nav-section">
     <div class="nav-label">🟢 Yeşil Alan</div>
@@ -545,6 +559,9 @@
     <div class="nav-item" onclick="navDx('Anal Fissür')"><span class="nav-dot nd-g"></span>Anal Fissür</div>
     <div class="nav-item" onclick="navDx('Konstipasyon')"><span class="nav-dot nd-g"></span>Konstipasyon</div>
     <div class="nav-item" onclick="navDx('Demir Eksikliği Anemisi')"><span class="nav-dot nd-g"></span>Demir Eks. Anemisi</div>
+    <div class="nav-item" onclick="navDx('Akut Urtiker')"><span class="nav-dot nd-g"></span>Akut Urtiker</div>
+    <div class="nav-item" onclick="navDx('Angioödem')"><span class="nav-dot nd-g"></span>Angioödem</div>
+    <div class="nav-item" onclick="navDx('Dismenore')"><span class="nav-dot nd-g"></span>Dismenore</div>
   </div>
 </sidebar>
 
@@ -983,6 +1000,128 @@ const DB = {
     order: "",
     recete: "Ferrosanol duodenal kaps 1×1 (tok karnına)\nDerin anemi: 2×1",
     notes: ""
+  },
+
+  // ── YENİ EKLENENLER ──────────────────────────────────────
+  "AF (Atriyal Fibrilasyon)": {
+    alan: "KIRMIZI",
+    istekler: "EKG (AF konfirme + WPW ekarte)\nCBC/BK/CRP + Troponin + TSH\nElektrolitler (K, Mg, Ca) + BFT + D-dimer",
+    order: "1) ANTİKOAGÜLASYON: Enoksaparin (Clexane) 0.1cc/10kg SC\n   VEYA Heparin 70-100 IU/kg IV bolus\n   (Rutin antikoagülan kullanıyorsa INR bak: <2 ise ver)\n\n2) UNSTABIL (hipotansiyon/bilinç/ağır dispne):\n   → Senkronize Kardiyoversiyon 200 Joule\n   + Amiodaron 150mg 100cc SF'de IV inf\n\n3) STABİL — EF>40 (KY bulgusu yok):\n   → Beloc 5mg 10cc SF'de IV push (5dk×3)\n   VEYA Diltiazem 0.25mg/kg 10cc SF'de IV push\n   VEYA Amiodaron\n\n4) STABİL — EF<40 (KY bulgusu var):\n   → Amiodaron 150mg 100cc SF'de 10dk IV\n   + Digoksin eklenebilir",
+    recete: "",
+    notes: "EKO OLMADAN EF TAHMİNİ:\nDüşük EF: bilinen KY/MI + ral + JVD + ödem + S3 + soğuk ekstremite + hipotansiyon + LBBB\nYüksek EF: izole AF + stabil + akciğer temiz + ödem yok + genç\nEmin değilsen → AMİODARAN her iki durumda güvenli\nWPW+AF → Beta bloker/Diltiazem/Adenozin KESİNLİKLE kontrendike → direkt KV\nK<3.5 ise önce KCl replase et\nAF süresi >48 saat veya bilinmiyor → KV öncesi 3 hafta antikoagülasyon veya TEE"
+  },
+  "VF / Pulseless VT": {
+    alan: "KIRMIZI",
+    istekler: "",
+    order: "CPR hemen başla (30:2)\n→ Defibrilasyon (200J bifazik)\n→ CPR 2dk devam\n→ 3. şoktan sonra: Amiodaron 300mg %5 Dextroz'da IV push\n→ 1amp Adrenalin IV push (her 3-5 dk tekrar)\n→ 5. şoktan sonra: Amiodaron 150mg ekle\n→ Geri döndürülebilir nedenler: 5H/5T",
+    recete: "",
+    notes: ">300-500 atım/dk — P/QRS/T yok\n5H: Hipoksi, Hipovolemi, Hipo/Hiperkalemi, Hipotermi, Hidrojen (asidoz)\n5T: Tansiyon (pnömotoraks), Tamponad, Tromboz (PE), Tromboz (MI), Toksin"
+  },
+  "Unstabil Taşikardi": {
+    alan: "KIRMIZI",
+    istekler: "EKG",
+    order: "Kardiyoloji KONS/112 → Resüsitasyon odasına al\n→ Entübasyon malzemesi hazırla\n→ Sedasyon/Analjezi: 100cc SF'de 1amp Contramal IV bolus\n   + Dormicium 0.03mg/kg IV push\n→ Senkronize Kardiyoversiyon:\n   • Düzenli dar QRS: 50-100 Joule\n   • Düzensiz dar QRS: 120-200 Joule\n   • Düzenli geniş QRS: 100 Joule\n   (3 kez dene)\n→ Hala devam ederse: Amiodaron 300mg %5 Dextroz'da 10-20 dk IV",
+    recete: "",
+    notes: "Unstabil kriterleri: şuur değişikliği / göğüs ağrısı / hipotansiyon / ciddi dispne / şok / senkop"
+  },
+  "Stabil Taşikardi (Dar QRS)": {
+    alan: "KIRMIZI",
+    istekler: "EKG",
+    order: "Vagal manevra\n→ Adenozin 6mg IV push (arkasından 20cc SF flush)\n   → Etki yoksa: Adenozin 12mg IV push\n   → Etki yoksa: Adenozin 18mg IV push\n→ Etki yoksa: Diltiazem 0.25mg/kg 10cc SF'de IV push\n   VEYA Beloc 5mg 10cc SF'de IV push (5dk'da 3 kez)",
+    recete: "",
+    notes: "TÜM BU İLAÇLAR KONTRENDİKE: AV blok / Bradikardi / Hipotansiyon / WPW+AF / Dekompanse KY\nAstım/KOAH hastasında Adenozin KONTRENDİKE → Beloc ver"
+  },
+  "Göğüs Ağrısı (Genel Yaklaşım)": {
+    alan: "SARI",
+    istekler: "EKG (ilk 10 dk içinde)\nKardiyak panel (Troponin, CK-MB)\n→ Koroner BT anjio veya Toraks BT",
+    order: "",
+    recete: "",
+    notes: "EKG'ye göre yönlendir:\n• ST elevasyonu → STEMI protokolü\n• ST depresyonu/T inversiyonu + Troponin yüksek → NSTEMI protokolü\n• EKG normal + Troponin 0/2/8. saat → PE? Diseksiyon? Musküloskeletal?"
+  },
+  "AF — EKO Olmadan EF Tahmini": {
+    alan: "KIRMIZI",
+    istekler: "EKG + CBC/BK/CRP + Troponin + TSH + Elektrolitler + BFT",
+    order: "UNSTABIL → Senkronize KV 200J + Amiodaron inf\nSTABİL:\n1) Antikoag: Clexane 0.1cc/10kg SC VEYA Heparin 70-100 IU/kg IV\n2) EF>40: Beloc 5mg IV (5dk×3) VEYA Diltiazem 0.25mg/kg IV VEYA Amiodaron\n   EF<40: Amiodaron 150mg 100cc SF 10dk IV + Digoksin eklenebilir",
+    recete: "",
+    notes: "Düşük EF bulguları: KY/MI öyküsü + ral + JVD + ödem + S3 + soğuk ekstremite + LBBB\nYüksek EF: izole AF + genç + stabil + temiz akciğer\nEmin değilsen → Amiodaron güvenli seçim\nWPW+AF → direkt KV, ilaç verme!"
+  },
+  // ── YENİ BULUNANLAR ─────────────────────────────────────
+  "Pnömoni": {
+    alan: "SARI",
+    istekler: "PA Akciğer Grafisi + CBC/BK/CRP",
+    order: "Parol 1000mg IV infüzyon + O2\nCURB-65 ≥ 2 → YATIŞ",
+    recete: "Klamoks 1000mg 14tb 3×1 (7 gün)\nKlamer 500mg 14tb 2×1 (7 gün)\nParol 500mg 30tb 3×2\nMucovit-C 600mg 30tb 2×1",
+    notes: "Penisilin alerjisi → Florokinolon monoterapisi\nCURB-65: Konfüzyon + BUN>7 + Solunum>30 + BP<90/60 + Yaş≥65"
+  },
+  "Angioödem": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "500cc SF'de 1amp Avil + 1amp Dekort IV infüzyon\n⚠️ AĞIR ise (solunum sıkıntısı, bronkospazm): ADRENALİN hemen ver!",
+    recete: "Allerset tb 1×1",
+    notes: "Larenks tutulumu → havayolu tehlikesi → anafilaksi protokolüne geç"
+  },
+  "Akut Urtiker": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "1amp Avil + 1amp Dekort IM",
+    recete: "Allerset tb 1×1",
+    notes: ""
+  },
+  "Dismenore": {
+    alan: "YEŞİL",
+    istekler: "",
+    order: "1amp Dikloron IM",
+    recete: "Dikloron 50mg 20tb 2×1",
+    notes: ""
+  },
+  "Eklampsi": {
+    alan: "KIRMIZI",
+    istekler: "CBC/BK + TİT + İdrar proteini",
+    order: "ABC\n→ Magnezyum Sülfat 4-6g IV infüzyon (15 dakikada)\n→ Ardından 1.5g/saat idame infüzyon\n→ Kadın Doğum KONS/SEVK",
+    recete: "",
+    notes: "Gebelik + nöbet = Eklampsi. Preeklampsi zemininde gelişir.\nMg Sülfat antidotu: Kalsiyum Glukonat 1g IV"
+  },
+  "Hipoglisemi": {
+    alan: "SARI",
+    istekler: "KŞ ölç (< 50 kritik)",
+    order: "Hafif (bilinçli): 1 bardak meyve suyu / 15gr glükoz / 3 kesme şeker → 15 dk bekle\nOrta-Ağır (bilinç bozuk): 20-50cc %50 Dekstroz IV bolus\n→ Ardından %5 Dekstroz idame IV infüzyon\n→ Hala yanıt yoksa: Glukagon 1mg SC/IM",
+    recete: "",
+    notes: "KŞ < 50 → Hipoglisemi\nSVO, nöbet, bilinç değişikliğinde her zaman KŞ ölç!"
+  },
+  "Renal Kolik": {
+    alan: "SARI",
+    istekler: "CBC/BK/CRP + TİT + ADBG",
+    order: "500cc SF'de 1amp Buscopan + 1amp Arveles IV infüzyon\n→ Yanıt yoksa: Parol flakon + 1-2amp Arveles\n→ Hala yanıt yoksa: 100cc SF'de 1amp Contramal IV yavaş",
+    recete: "Buscopan Plus 20tb 2×1\nDexpass 25/300mg tb 2×1",
+    notes: ""
+  },
+  "Menenjit": {
+    alan: "SARI",
+    istekler: "CBC/BK/CRP + LP (lomber ponksiyon) + Kan kültürü",
+    order: "⚠️ ÖNCE MASKE TAK — damlacık izolasyonu!\nABC → O2\n→ Vankomisin 15-20mg/kg IV (her 8-12 saatte)\n→ Seftriakson 2g IV (her 12 saatte)\nVEYA Sefotaksim 2g IV (her 4-6 saatte)\n→ >50 yaş ise: + Ampisilin 2g IV (her 4-6 saatte)\n→ Enfeksiyon Hastalıkları KONS/SEVK\n→ Temas profilaksisi düzenle",
+    recete: "",
+    notes: "Klasik triad: Ateş + Ense sertliği + Şuur değişikliği\nKernig/Brudzinski pozitif\nKomşulara/temaslılara profilaksi: Rifampisin veya Siprofloksasin"
+  },
+  "Hiperglisemi (Basit)": {
+    alan: "SARI",
+    istekler: "CBC/BK + TİT + SONDA + Saatlik KŞ takibi",
+    order: "2 damar yolu aç\n→ 1000cc SF IV bolus (1 saatte)\n→ Sonra 1000cc SF IV 3 saatte infüzyon\n→ K > 3.3 ise: İnsülin 0.1 IU/kg/saat IV (100cc SF'de)\n→ K < 5.5 + iyi idrar çıkışı: insüline 20-30 mEq KCl ekle\n→ K < 3.3 ise: önce K tedavisi, sonra insülin\n→ Dahiliye KONS",
+    recete: "",
+    notes: "KŞ > 250, bilinç kaybı yok, dehidrasyon yok, idrarda keton yok, normal osmolarite\nBilinç kaybı + keton → DKA protokolüne geç\nKŞ > 600 + keton yok → HHS protokolüne geç"
+  },
+  "Pnömotoraks": {
+    alan: "KIRMIZI",
+    istekler: "PA Akciğer Grafisi (PAAG)",
+    order: "Tüp Torakostomi → Göğüs Cerrahisi KONS/SEVK\n\n⚠️ TANSİYONLU PNÖMOTORAKSta (trakea deviasyonu + hipotansiyon + solunum sıkıntısı):\n→ PAAG bekleme! Hemen iğne dekompresyonu:\n   14 gauge turuncu iğne — 2. interkostal aralık midklaviküler hat\n   VEYA 5. interkostal aralık ön aksiller hat\n→ Ardından Tüp Torakostomi",
+    recete: "",
+    notes: "Tansiyon pnömotoraks klinik tanıdır — BT bekleme!\nBulgular: Trakea karşı tarafa deviasyon + azalmış solunum sesi + hipotansiyon + boyun veni dolgunluğu"
+  },
+  "Kardiyojenik Akciğer Ödemi": {
+    alan: "KIRMIZI",
+    istekler: "CBC/BK/Troponin/Kan Gazı\nEKG + PA Akciğer Grafisi",
+    order: "ABC → Oturur pozisyon\n→ O2 (SAT <90 ise yüksek akım, gerekirse NIV/CPAP)\n→ Lasix (Furosemid) 0.5-1mg/kg IV push (veya 40mg)\n   → 1 saatte yanıt yoksa 80mg'a çık\n   ⚠️ Max 160-200mg/doz GEÇMEYİN\n→ Kardiyoloji KONS/SEVK",
+    recete: "",
+    notes: "SAT düşük — O2 ve pozisyon hayat kurtarır\nNIV (BiPAP/CPAP) entübasyonu önleyebilir\nHipotansiyon varsa Lasix dikkatli — önce volüm durumunu değerlendir"
   }
 };
 
@@ -1064,6 +1203,15 @@ AFT (YEŞİL): Andorex gargara 4×1 + Calgel jel 3×1 yemekten önce + Kenacort 
 ANAL FİSSÜR (YEŞİL): Anestol pomad 2×1 + Madecassol 2×1 + Osmolac şurup 2×1 + Dolorex 3×1. Sıcak oturma banyosu.
 KONSTİPASYON (YEŞİL): Osmolac şurup 1×1 + Proctoglyvenol krem 2×1.
 DEMİR EKSİKLİĞİ ANEMİSİ (YEŞİL): Ferrosanol duodenal kaps 1×1 tok karnına (derin anemi: 2×1).
+PNOMONİ (SARI): PAAG+CBC/BK/CRP. Parol 1000mg IV+O2. CURB-65≥2→yatış. Reçete: Klamoks 3×1+Klamer 2×1 7gün+Parol+Mucovit-C. Penisilin alerjisi → Florokinolon.
+ANGİOÖDEM (YEŞİL): 500cc SF'de Avil+Dekort IV. Ağır ise ADRENALİN! Reçete: Allerset 1×1.
+AKUT URTİKER (YEŞİL): Avil+Dekort IM. Reçete: Allerset 1×1.
+DİSMENORE (YEŞİL): Dikloron IM. Reçete: Dikloron 50mg 2×1.
+EKLAMPSİ (KIRMIZI): Mg Sülfat 4-6g IV 15 dk→1.5g/saat idame→K/D KONS/SEVK. Antidot: Ca Glukonat 1g IV.
+HİPOGLİSEMİ (SARI): KŞ<50. Bilinçliyse meyve suyu/şeker. Bilinç bozuksa %50 Dekstroz 20-50cc IV→%5 Dex idame→Glukagon 1mg SC/IM.
+RENAL KOLİK (SARI): CBC/BK/CRP+TİT+ADBG. SF'de Buscopan+Arveles IV→Parol+Arveles→Contramal 100cc SF'de IV. Reçete: Buscopan Plus 2×1+Dexpass 2×1.
+MENENJİT (SARI): MASKE TAK! ABC+O2→Vankomisin 15-20mg/kg IV+Seftriakson 2g IV (her 12 saat)±Ampisilin 2g IV (>50 yaş)→Enfeksiyon KONS. Temas profilaksisi!
+HİPERGLİSEMİ BASİT (SARI): KŞ>250, keton yok, bilinç açık. 2 damar yolu→1000cc SF bolus→İnsülin 0.1IU/kg/saat IV→KCl if K<5.5→Dahiliye KONS.
 === BİTİŞ ===
 
 Kanıta dayalı cevap ver: Türk ACİL tıp kılavuzları, ACEP, ESC/ESH rehberlerine uygun.
