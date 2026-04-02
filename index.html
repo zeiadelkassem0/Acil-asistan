@@ -137,6 +137,7 @@
   .nd-r { background: var(--red); }
   .nd-a { background: var(--amber); }
   .nd-g { background: var(--green); }
+  .nd-p { background: #7c3aed; }
 
   /* MAIN */
   main {
@@ -284,6 +285,7 @@
   .t-kirmizi { background: var(--red-soft); color: var(--red); }
   .t-sari { background: var(--amber-soft); color: #c07020; }
   .t-yesil { background: var(--green-soft); color: var(--green); }
+  .t-ped { background: #f5f0ff; color: #7c3aed; }
   .result-section {
     padding: 14px 20px;
     border-bottom: 1px solid var(--border);
@@ -346,6 +348,7 @@
   .dx-btn.sel { background: var(--red-soft); color: var(--red); border-left-color: var(--red); font-weight: 500; }
   .dx-btn.sel-a { background: var(--amber-soft); color: #c07020; border-left-color: var(--amber); font-weight: 500; }
   .dx-btn.sel-g { background: var(--green-soft); color: var(--green); border-left-color: #2d6a4f; font-weight: 500; }
+  .dx-btn.sel-p { background: #f5f0ff; color: #7c3aed; border-left-color: #7c3aed; font-weight: 500; }
   .dx-cat {
     font-size: 9px;
     font-family: var(--mono);
@@ -472,8 +475,8 @@
     </div>
   </div>
   <div class="header-chips">
-    <span class="chip chip-red">57 Yaklaşım</span>
-    <span class="chip">Kişisel Veritabanı</span>
+    <span class="chip chip-red">90+ Yaklaşım</span>
+    <span class="chip">👶 Pediatrik Dahil</span>
   </div>
 </header>
 
@@ -567,6 +570,41 @@
     <div class="nav-item" onclick="navDx('Akut Urtiker')"><span class="nav-dot nd-g"></span>Akut Urtiker</div>
     <div class="nav-item" onclick="navDx('Angioödem')"><span class="nav-dot nd-g"></span>Angioödem</div>
     <div class="nav-item" onclick="navDx('Dismenore')"><span class="nav-dot nd-g"></span>Dismenore</div>
+  </div>
+  <div class="nav-section">
+    <div class="nav-label">👶 Pediatrik</div>
+    <div class="nav-item" onclick="navDx('Ped: ABLİ ÜSYE')"><span class="nav-dot nd-p"></span>ABLİ ÜSYE</div>
+    <div class="nav-item" onclick="navDx('Ped: Bronkopnömoni (Mikoplazma)')"><span class="nav-dot nd-p"></span>Bronkopnömoni</div>
+    <div class="nav-item" onclick="navDx('Ped: Buşon')"><span class="nav-dot nd-p"></span>Buşon</div>
+    <div class="nav-item" onclick="navDx('Ped: Otitis Eksterna')"><span class="nav-dot nd-p"></span>Otitis Eksterna</div>
+    <div class="nav-item" onclick="navDx('Ped: Pamukçuk (Kandida Stomatit)')"><span class="nav-dot nd-p"></span>Pamukçuk / Kandida</div>
+    <div class="nav-item" onclick="navDx('Ped: Diş Çıkarma / Gingivit')"><span class="nav-dot nd-p"></span>Diş Çıkarma / Gingivit</div>
+    <div class="nav-item" onclick="navDx('Ped: Alerjik Konjonktivit')"><span class="nav-dot nd-p"></span>Alerjik Konjonktivit</div>
+    <div class="nav-item" onclick="navDx('Ped: Pürülan Konjonktivit / Arpacık')"><span class="nav-dot nd-p"></span>Pürülan Konjonktivit</div>
+    <div class="nav-item" onclick="navDx('Ped: Viral AGE')"><span class="nav-dot nd-p"></span>Viral AGE</div>
+    <div class="nav-item" onclick="navDx('Ped: Bakteriyel AGE')"><span class="nav-dot nd-p"></span>Bakteriyel AGE</div>
+    <div class="nav-item" onclick="navDx('Ped: Paraziter AGE')"><span class="nav-dot nd-p"></span>Paraziter AGE</div>
+    <div class="nav-item" onclick="navDx('Ped: Kabızlık / Konstipasyon')"><span class="nav-dot nd-p"></span>Kabızlık</div>
+    <div class="nav-item" onclick="navDx('Ped: Gastroözofageal Reflü / Gastrit')"><span class="nav-dot nd-p"></span>Reflü / Gastrit</div>
+    <div class="nav-item" onclick="navDx('Ped: İnfantil Kolik')"><span class="nav-dot nd-p"></span>İnfantil Kolik</div>
+    <div class="nav-item" onclick="navDx('Ped: Enterobiyazis (Kılkurdu)')"><span class="nav-dot nd-p"></span>Enterobiyazis</div>
+    <div class="nav-item" onclick="navDx('Ped: Akut Sistit / İYE')"><span class="nav-dot nd-p"></span>Akut Sistit / İYE</div>
+    <div class="nav-item" onclick="navDx('Ped: Balanit')"><span class="nav-dot nd-p"></span>Balanit</div>
+    <div class="nav-item" onclick="navDx('Ped: Akut Ürtiker')"><span class="nav-dot nd-p"></span>Akut Ürtiker</div>
+    <div class="nav-item" onclick="navDx('Ped: Yumuşak Doku Enfeksiyonu')"><span class="nav-dot nd-p"></span>Yumuşak Doku Enf.</div>
+    <div class="nav-item" onclick="navDx('Ped: İmpetigo / Selülit')"><span class="nav-dot nd-p"></span>İmpetigo / Selülit</div>
+    <div class="nav-item" onclick="navDx('Ped: Bez Dermatiti (Pişik)')"><span class="nav-dot nd-p"></span>Bez Dermatiti</div>
+    <div class="nav-item" onclick="navDx('Ped: Kandidal Bez Dermatiti')"><span class="nav-dot nd-p"></span>Kandidal Bez Derm.</div>
+    <div class="nav-item" onclick="navDx('Ped: Seboreik Dermatit')"><span class="nav-dot nd-p"></span>Seboreik Dermatit</div>
+    <div class="nav-item" onclick="navDx('Ped: Tinea Corporis')"><span class="nav-dot nd-p"></span>Tinea Corporis</div>
+    <div class="nav-item" onclick="navDx('Ped: Paronişi / Tırnak Batması')"><span class="nav-dot nd-p"></span>Paronişi / Tırnak</div>
+    <div class="nav-item" onclick="navDx('Ped: Dermatozlar / El-Ayak-Ağız')"><span class="nav-dot nd-p"></span>El-Ayak-Ağız Hast.</div>
+    <div class="nav-item" onclick="navDx('Ped: Pedikülozis / Skabies')"><span class="nav-dot nd-p"></span>Pedikülozis / Uyuz</div>
+    <div class="nav-item" onclick="navDx('Ped: Demir Eksikliği')"><span class="nav-dot nd-p"></span>Demir Eksikliği</div>
+    <div class="nav-item" onclick="navDx('Ped: D Vitamini Eksikliği')"><span class="nav-dot nd-p"></span>D Vitamini Eksikliği</div>
+    <div class="nav-item" onclick="navDx('Ped: Geçici Sinovit')"><span class="nav-dot nd-p"></span>Geçici Sinovit</div>
+    <div class="nav-item" onclick="navDx('Ped: Yumuşak Doku Travması')"><span class="nav-dot nd-p"></span>Yumuşak Doku Travma</div>
+    <div class="nav-item" onclick="navDx('Ped: Yanık (Minör)')"><span class="nav-dot nd-p"></span>Yanık (Minör)</div>
   </div>
 </sidebar>
 
@@ -1140,6 +1178,234 @@ const DB = {
     order: "ABC → Oturur pozisyon\n→ O2 (SAT <90 ise yüksek akım, gerekirse NIV/CPAP)\n→ Lasix (Furosemid) 0.5-1mg/kg IV push (veya 40mg)\n   → 1 saatte yanıt yoksa 80mg'a çık\n   ⚠️ Max 160-200mg/doz GEÇMEYİN\n→ Kardiyoloji KONS/SEVK",
     recete: "",
     notes: "SAT düşük — O2 ve pozisyon hayat kurtarır\nNIV (BiPAP/CPAP) entübasyonu önleyebilir\nHipotansiyon varsa Lasix dikkatli — önce volüm durumunu değerlendir"
+  },
+
+  // ══════════════════════════════════════════════
+  // 👶 PEDİATRİK REÇETE REHBERİ (Prati-Case PDF)
+  // ══════════════════════════════════════════════
+  "Ped: ABLİ ÜSYE": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "🔵 AMOKSİSİLİN-KLAVULANİK ASİT (Amoklavin):\n• 10 kg  → Amoklavin 200 süsp 2×1 ölçek (DIB) 7-10 gün + Calpol süsp 4×1 ölçek + Prospan şurup 2×½ ölçek (2.5ml) 5-7 gün + Serum fiz. 4×0.5-1ml\n• 20 kg  → Amoklavin 400 süsp 2×1 ölçek (DIB) 7-10 gün + Calpol süsp 4×2 ölçek + Erdostin süsp 2×1 ölçek 5-7 gün + İliadin ped nazal sprey 2×1 5 gün\n• 30 kg  → Amoklavin 600 süsp 2×1 ölçek (DIB) 7-10 gün + Calpol 6 plus süsp 4×1.5 ölçek + İliadin ped nazal sprey 2×1 5 gün\n• >12 yaş / >40 kg → Amoklavin 1g tb 2×1 (DIIB) 10 gün + Calpol 6 plus süsp 4×2 ölçek VEYA Parol tb 3×1 + Erdostein 2×2 ölçek 5-7 gün + İliadin nazal sprey 2×1 5 gün\n\n🔵 FENOKSİMETİLPENİSİLİN (Pen-os):\n• <1 yaş   → Pen-os 400 süsp 80ml — 3×½ ölçek (DIB) 10 gün\n• 1-6 yaş  → Pen-os 400 süsp 160ml — 3×1 ölçek (DIB) 10 gün\n• 6-12 yaş → Pen-os 400 süsp 160ml — 3×2 ölçek (DIIB) 10 gün\n• >12 yaş / >40 kg → Pen-os 1000mg 24tb — 2×1.5 tb (DIIB) 10 gün\n\n🔵 BENZATİN PENİSİLİN G:\n• <27 kg → Deposilin 6.3.3 — 1×1 IM tek doz\n• >27 kg → Deposilin 12.6.6 — 1×1 IM tek doz",
+    notes: "DIB = Dolu İdrar ile Birlikte (tok) | DIIB = Dolu İdrar ile İki İçim (tok, iki yudumda)"
+  },
+  "Ped: Bronkopnömoni (Mikoplazma)": {
+    alan: "PEDİATRİK",
+    istekler: "PA Akciğer Grafisi + CBC/BK/CRP",
+    order: "",
+    recete: "🔵 KLARİTROMİSİN (Macrol) — Penisilin alerjisi / Atipik pnömoni — 15mg/kg/gün — 7.5mg/kg/doz × 2:\n• 15 kg → Macrol 125mg süsp 2×1 ölçek (DIB) 10 gün + Calpol 6 plus süsp 4×1.5 ölçek + İliadin ped nazal sprey 2×1 5 gün\n• 30 kg → Macrol 250 süsp 2×1 ölçek (DIB) 10 gün + Calpol 6 plus süsp 4×1.5 ölçek + İliadin ped nazal sprey 2×1 5 gün\n• >12 yaş / >40 kg → Macrol 250 süsp 2×2 ölçek (DIIB) 10 gün VEYA Macrol 500mg tb 2×1 (DIB) 10 gün + Calpol 6 plus süsp 4×1.5 ölçek + İliadin nazal sprey 2×1 5 gün",
+    notes: "Klaritromisinin endikasyonu: Penisilin alerjisi VEYA atipik (mikoplazma) pnömoni şüphesi"
+  },
+  "Ped: Buşon": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Tüm yaşlar: Oksibor kulak damlası 3×5-10 damla — 5 gün",
+    notes: "Kulak tıkacı (serümen birikimi)"
+  },
+  "Ped: Otitis Eksterna": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "• >1 yaş (hafif): Siprogut kulak damlası 2×3 damla — 7 gün\n• 10 kg → Amoklavin 200 süsp 2×1 ölçek (DIB) 7-10 gün + Calpol süsp 4×1 ölçek\n• 20 kg → Amoklavin 400 süsp 2×1 ölçek (DIB) 7-10 gün + Calpol süsp 4×2 ölçek + Siprogut kulak damlası 2×3 damla 7 gün\n• 30 kg → Amoklavin 600 süsp 2×1 ölçek (DIB) 7-10 gün + Calpol 6 plus süsp 4×1.5 ölçek + Siprogut kulak damlası 2×3 damla 7 gün\n• >12 yaş / >40 kg → Amoklavin 1g tb 2×1 (DIIB) 10 gün + Calpol 6 plus süsp 4×2 ölçek VEYA Parol tb 3×1 + Siprogut kulak damlası 2×3 damla 7 gün",
+    notes: "Kulak zarı delinmişse Gentagut/Siprogut KONTRENDİKE"
+  },
+  "Ped: Pamukçuk (Kandida Stomatit)": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "1 çay bardağı suya 1 çay kaşığı bikarbonat karıştır → Günde 3-4 kez lezyonları sil (10-14 gün)\n+ Mikostatin oral süsp 4×1ml — 10-14 gün\nPediatri polikliniği yönlendir",
+    notes: ""
+  },
+  "Ped: Diş Çıkarma / Gingivit": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Calgel jel 3×1",
+    notes: ""
+  },
+  "Ped: Alerjik Konjonktivit": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Patanol göz damlası 2×1 damla",
+    notes: ""
+  },
+  "Ped: Pürülan Konjonktivit / Arpacık": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Netira göz damlası 3×1\n+ Tobrased göz damlası 3×2 damla\n+ Moxai 1×1 — 7 gün\nÇapaklanma için: Serum fizyolojik 4×0.5-1ml (6 saatte bir temizlik)",
+    notes: ""
+  },
+  "Ped: Viral AGE": {
+    alan: "PEDİATRİK",
+    istekler: "CBC/BK/VKG + Gaita kültür/mikro/parazit",
+    order: "",
+    recete: "• 10 kg → Georal günde 1 litre + Grizinc 15/5ml 100ml sus. 1×1.5ml + Motis şurup 3×1 (kg ölçekli pipet) + Reflor 250mg 10 şase 1×1 — 7-10 gün\n• 20 kg → Georal günde 1 litre + Grizinc 15/5ml 100ml sus. 1×12ml + Motis şurup 3×1 (kg ölçekli pipet) + Reflor 250mg 10 şase 1×1 — 7-10 gün\n• >12 yaş / >40 kg → Georal günde 1 litre + Grizinc 15/5ml 100ml sus. 1×2ml + Motis şurup 3×1 (kg ölçekli pipet) + Reflor 250mg 10 şase 1×1 — 7-10 gün",
+    notes: "Metpamid tercih edilmez!\nAyran / çorba / muz / yoğurt / haşlanmış patates öner"
+  },
+  "Ped: Bakteriyel AGE": {
+    alan: "PEDİATRİK",
+    istekler: "CBC/BK/VKG + Gaita kültür/mikro/parazit",
+    order: "",
+    recete: "🔵 SEFİKSİM (Suprax) — 8mg/kg/gün tek doz, ilk gün çift doz:\n• 12.5 kg → Suprax süsp 1×1 ölçek (DIB) 10 gün + Georal 1 litre/gün + Grizinc 1×1.5ml + Motis şurup 3×1 + Reflor 1×1 7-10 gün\n• 25 kg   → Suprax süsp 1×2 ölçek (DIB) 10 gün + Georal 1 litre/gün + Grizinc 1×2ml + Motis şurup 3×1 + Reflor 1×1 7-10 gün\n• >12 yaş / >40 kg → Suprax 400 tb 1×1 (DIB) 10 gün + Georal 1 litre/gün + Grizinc 1×2ml + Motis şurup 3×1 + Reflor 1×1 7-10 gün",
+    notes: "Kanlı ishal → uzman danış"
+  },
+  "Ped: Paraziter AGE": {
+    alan: "PEDİATRİK",
+    istekler: "CBC/BK/VKG + Gaita kültür/mikro/parazit",
+    order: "",
+    recete: "🔵 METRONİDAZOL (Flagyl) — 37.5mg/kg/gün 3 eşit doz — Amebiyazis:\n• 10 kg → Flagyl 125mg süsp 3×1 ölçek (DIB) 7-10 gün + Georal 1L/gün + Grizinc 1×1.5ml + Motis 3×1 + Reflor 1×1\n• 20 kg → Flagyl 125mg süsp 3×2 ölçek (DIB) 7-10 gün + Georal 1L/gün + Grizinc 1×12ml + Motis 3×1 + Reflor 1×1\n• >12 yaş / >40 kg → Flagyl 500 tb 3×1 (DIB) 7-10 gün + Georal 1L/gün + Grizinc 1×2ml + Motis 3×1 + Reflor 1×1",
+    notes: "Giardia: Flagyl 7-10 gün | E. Histolitika: 10 gün"
+  },
+  "Ped: Kabızlık / Konstipasyon": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Duphalac süsp:\n• <2 yaş   → 1×5ml (DIB)\n• 2-12 yaş → 1×10ml (DIB)\n• >12 yaş  → 1×15ml (DIB)",
+    notes: ""
+  },
+  "Ped: Gastroözofageal Reflü / Gastrit": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Talcid süsp:\n• 2-12 yaş → 4×5-10ml\n• >12 yaş  → 4×10-20ml VEYA Talcid tb 4×2 tb\n\nLansor kapsül (aç karnına):\n• <30 kg  → Lansor 15mg kps 1×1 (DIB) 14 gün\n• >30 kg  → Lansor 30mg kps 1×1 (DIB) 14 gün",
+    notes: ""
+  },
+  "Ped: İnfantil Kolik": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Biogaia damla 1×5 damla",
+    notes: "Bebek gaz sancısı"
+  },
+  "Ped: Enterobiyazis (Kılkurdu)": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Mebendazol — 11mg/kg/doz:\n• 22 kg → Kontil 250mg süsp 1×1 ölçek (5ml) aç karnına — 2 hafta sonra tekrar\n• >12 yaş / >40 kg → Kontil tb 1×2 tb aç karnına — 2 hafta sonra tekrar",
+    notes: "Tüm aile aynı anda tedavi edilmeli"
+  },
+  "Ped: Akut Sistit / İYE": {
+    alan: "PEDİATRİK",
+    istekler: "TİT + İdrar kültür",
+    order: "",
+    recete: "🔵 SEFİKSİM (Suprax) — 8mg/kg/gün tek doz:\n• 12.5 kg → Suprax süsp 1×1 ölçek — 10 gün\n• 25 kg   → Suprax süsp 1×2 ölçek — 10 gün\n• >12 yaş / >40 kg → Suprax 400 tb 1×1 (DIB) — 10 gün",
+    notes: ""
+  },
+  "Ped: Balanit": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Bactroban krem 2×1 — 5 gün\nVazlein krem 2×1 — 5 gün\nHipokort krem 2×1 — 5 gün\n(Gerekirse oral Augmentin eklenebilir)",
+    notes: "Glans-sünnet derisi iltihabı"
+  },
+  "Ped: Akut Ürtiker": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "🔵 DESLORATADİN (Aerius):\n• 6 ay-6 yaş → Aerius süsp 1×½ ölçek — 7 gün\n• 6-12 yaş   → Aerius süsp 1×1 ölçek — 7 gün\n• >12 yaş    → Aerius süsp 1×2 ölçek VEYA Aerius tb 1×1 — 7 gün\n\n🔵 SETİRİZİN (Zyrtec):\n• 2-6 yaş   → Zyrtec süsp 1×½ ölçek — 7 gün\n• 6-12 yaş  → Zyrtec süsp 1×1 ölçek — 7 gün\n• >12 yaş   → Zyrtec süsp 1×2 ölçek VEYA Zyrtec tb 1×1 — 7 gün",
+    notes: ""
+  },
+  "Ped: Yumuşak Doku Enfeksiyonu": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Bactroban krem 2×1\nFucidin krem 2×1",
+    notes: "Lokalize enfeksiyon için topikal yeterli"
+  },
+  "Ped: İmpetigo / Selülit": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "🔵 AMOKSİSİLİN-KLAVULANİK ASİT — 40mg/kg/gün, 20mg/kg/doz × 2:\n• 10 kg  → Amoklavin 200 süsp 2×1 ölçek (DIB) — 10 gün\n• 20 kg  → Amoklavin 400 süsp 2×1 ölçek (DIB) — 10 gün\n• 30 kg  → Amoklavin 600 süsp 2×1 ölçek (DIB) — 10 gün\n• >12 yaş / >40 kg → Amoklavin 1g tb 2×1 (DIIB) — 10 gün",
+    notes: ""
+  },
+  "Ped: Bez Dermatiti (Pişik)": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Hypocort krem 2×1 — 5-7 gün",
+    notes: ""
+  },
+  "Ped: Kandidal Bez Dermatiti": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Hypokort krem 2×1 — 5-7 gün\nDermotrosyde krem 2×1 — 5-7 gün",
+    notes: ""
+  },
+  "Ped: Seboreik Dermatit": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Ketoral şampuan 2 kez/hafta\nHypokort krem 2×1 — 5-7 gün",
+    notes: "Kepek / konak"
+  },
+  "Ped: Tinea Corporis": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Terbisil krem 2×1",
+    notes: "Gövde mantarı"
+  },
+  "Ped: Paronişi / Tırnak Batması": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "🔵 AMOKSİSİLİN-KLAVULANİK ASİT:\n• 10 kg  → Amoklavin 200 süsp 2×1 ölçek (DIB) — 10 gün\n• 20 kg  → Amoklavin 400 süsp 2×1 ölçek (DIB) — 10 gün\n• 30 kg  → Amoklavin 600 süsp 2×1 ölçek (DIB) — 10 gün\n• >12 yaş / >40 kg → Amoklavin 1g tb 2×1 (DIIB) — 10 gün\n+ Bactroban krem 2×1 + Fucidin krem 2×1",
+    notes: ""
+  },
+  "Ped: Dermatozlar / El-Ayak-Ağız": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Zyrtec süsp:\n• 2-6 yaş   → 1×½ ölçek — 7 gün\n• 6-12 yaş  → 1×1 ölçek — 7 gün\n• >12 yaş   → 1×2 ölçek VEYA Zyrtec tb 1×1 — 7 gün\nAteş için kiloya uygun Calpol / Dolven",
+    notes: ""
+  },
+  "Ped: Pedikülozis / Skabies": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Permetrin:\n• Kwellada losyon ve şampuan\n• Zalvor deri kremi",
+    notes: "Bitlenme ve uyuz tedavisi. Tüm aile aynı anda tedavi edilmeli."
+  },
+  "Ped: Demir Eksikliği": {
+    alan: "PEDİATRİK",
+    istekler: "CBC + periferik yayma + serum demiri + ferritin",
+    order: "",
+    recete: "Ferrosanol B şurup (aç karnına):\n• 10 kg → 3×2.5ml — 3 ay\n• 20 kg → 3×10ml — 3 ay\n• 30 kg → 3×7.5ml — 3 ay\n• >12 yaş / >40 kg → Ferrosanol duod kps 2×1 (aç karnına) — 3 ay",
+    notes: ""
+  },
+  "Ped: D Vitamini Eksikliği": {
+    alan: "PEDİATRİK",
+    istekler: "25-OH Vitamin D3 seviyesi",
+    order: "",
+    recete: "De-vit 3 damla — 2×8 damla (DIIB) — 2 ay\n[Vitamin D3 2000 IU/gün]",
+    notes: ""
+  },
+  "Ped: Geçici Sinovit": {
+    alan: "PEDİATRİK",
+    istekler: "Kalça/diz USG + CBC/BK/CRP + Sedimantasyon",
+    order: "",
+    recete: "İbuprofen:\n• 1 yaş / 10 kg  → Dolven süsp 3×1 ölçek\n• 6 yaş / 20 kg  → Dolven süsp 3×2 ölçek VEYA İbu-fort süsp 4×1 ölçek\n• 10 yaş / 30 kg → Dolven süsp 3×2 ölçek VEYA İbu-fort süsp 4×1.5 ölçek\n• >12 yaş / 40 kg → İbu-fort süsp 3×2 ölçek VEYA Nurofen/Brufen 400mg tb 3×1",
+    notes: "Septik artrit ve Perthes hastalığı ekarte edilmeli"
+  },
+  "Ped: Yumuşak Doku Travması": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "",
+    recete: "Hirudoid forte jel 2-3×1 — 7-10 gün\nLasonil krem 2-3×1 — 10 gün",
+    notes: "Minör ekimoz / kontüzyon"
+  },
+  "Ped: Yanık (Minör)": {
+    alan: "PEDİATRİK",
+    istekler: "",
+    order: "Soğutma (soğuk su, 10-20 dk) → Temizleme → Pansuman",
+    recete: "Silverdin krem 1-2×1\nAnestol pomad 2×1\nBactigras pansuman (klorheksidin emdirilmiş tül — hafif-orta yanıklarda tercih)",
+    notes: "Tetanoz profilaksisi unutulmamalı"
   }
 };
 
@@ -1401,19 +1667,18 @@ let selectedDx = null;
 function buildDxGrid(filter = '') {
   const grid = document.getElementById('dx-grid');
   const fl = filter.toLowerCase();
-  const colorMap = { KIRMIZI: 'sel', SARI: 'sel-a', YEŞİL: 'sel-g' };
-  const catMap = { KIRMIZI: '🔴', SARI: '🟡', YEŞİL: '🟢' };
+  const colorMap = { KIRMIZI: 'sel', SARI: 'sel-a', YEŞİL: 'sel-g', PEDİATRİK: 'sel-p' };
+  const catMap = { KIRMIZI: '🔴', SARI: '🟡', YEŞİL: '🟢', PEDİATRİK: '👶' };
 
-  // Group by alan
-  const groups = { KIRMIZI: [], SARI: [], YEŞİL: [] };
+  const groups = { KIRMIZI: [], SARI: [], YEŞİL: [], PEDİATRİK: [] };
   Object.entries(DB).forEach(([k, v]) => {
     if (!fl || k.toLowerCase().includes(fl)) {
-      groups[v.alan]?.push([k, v]);
+      if (groups[v.alan] !== undefined) groups[v.alan].push([k, v]);
     }
   });
 
   let html = '';
-  ['KIRMIZI', 'SARI', 'YEŞİL'].forEach(alan => {
+  ['KIRMIZI', 'SARI', 'YEŞİL', 'PEDİATRİK'].forEach(alan => {
     const items = groups[alan];
     if (!items || items.length === 0) return;
     const cls = colorMap[alan];
@@ -1422,7 +1687,7 @@ function buildDxGrid(filter = '') {
     items.forEach(([k]) => {
       const isSel = selectedDx === k;
       const selCls = isSel ? cls : '';
-      html += `<button class="dx-btn ${selCls}" onclick="showDx('${k.replace(/'/g, "\\'")}')">${k}</button>`;
+      html += `<button class="dx-btn ${selCls}" onclick="showDx('${k.replace(/'/g, "\\'")}')">${k.replace('Ped: ', '')}</button>`;
     });
   });
 
@@ -1438,12 +1703,13 @@ function showDx(name) {
   buildDxGrid(document.getElementById('dx-search')?.value || '');
   const d = DB[name];
   if (!d) return;
-  const badgeCls = { KIRMIZI: 't-kirmizi', SARI: 't-sari', YEŞİL: 't-yesil' };
-  const em = { KIRMIZI: '🔴', SARI: '🟡', YEŞİL: '🟢' };
+  const badgeCls = { KIRMIZI: 't-kirmizi', SARI: 't-sari', YEŞİL: 't-yesil', PEDİATRİK: 't-ped' };
+  const em = { KIRMIZI: '🔴', SARI: '🟡', YEŞİL: '🟢', PEDİATRİK: '👶' };
+  const displayName = name.replace('Ped: ', '');
 
   let html = `<div class="detail-card">
     <div class="detail-header">
-      <div class="detail-title">${em[d.alan]} ${name}</div>
+      <div class="detail-title">${em[d.alan]} ${displayName}</div>
       <span class="triage-badge ${badgeCls[d.alan]}">${d.alan}</span>
       <span class="notion-pill">Notion</span>
     </div>`;
